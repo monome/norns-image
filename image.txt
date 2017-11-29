@@ -84,6 +84,10 @@ sudo vim /boot/config.txt
 	dtoverlay=i2s-mmap 
 	# Enable monome-snd (loads snd_soc_monome)
 	dtoverlay=monome
+	# Enable gpio-powerdown
+	dtoverlay=gpio-poweroff:gpiopin=12,active_low=1
+	# Enable battery monitor
+	dtoverlay=bq27441
 
 
 >> on norns (jack)
