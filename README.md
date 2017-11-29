@@ -39,3 +39,11 @@ some startup scripts:
 * `fb.sh` installs framebuffer modules and tests the oled (ctrl-c to quit test)
 
 you'll want to set up your git environment and then clone the norns repo.  
+
+## poweroff
+
+* presently you'll need to push the buttom button to hard-power-off the unit after running `sudo shutdown now` (this will be automatic in the future)
+
+## battery
+
+* the battery management driver is not yet installed, so there's no way to check how much battery you have left... beware! i also don't yet have an estimate on battery life, but i'm confident at low loads it will last quite a while-- but take care if unsaved work is happening on battery.
