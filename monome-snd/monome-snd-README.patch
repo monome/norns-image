@@ -1,0 +1,17 @@
+*** arch/arm/boot/dts/overlays/README.orig	2017-10-30 13:12:21.571398144 -0400
+--- arch/arm/boot/dts/overlays/README	2017-10-30 13:13:00.890671970 -0400
+***************
+*** 987,992 ****
+--- 987,998 ----
+  Params: interrupt               GPIO pin for interrupt (default 4)
+  
+  
++ Name:   monome
++ Info:   Configures the Monome audio card
++ Load:   dtoverlay=monome
++ Params: <None>
++ 
++ 
+  Name:   mz61581
+  Info:   MZ61581 display by Tontec
+  Load:   dtoverlay=mz61581,<param>=<val>

@@ -1,0 +1,1 @@
+amixer set Master on
