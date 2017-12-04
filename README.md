@@ -31,19 +31,11 @@ feel free to disconnect from `screen` (crtl-a-z)
 
 some startup scripts:
 
-* `snd-unmute.sh` unmutes the soundcard
-* `analog-gain-on.sh` turns up the analog gain stages
-* `hp.sh` turns up the headphone
-* `sudo gpio.sh` sets up the GPIO
+* `init-norns.sh` sets up all the un-setup bits (analog gains, fb, snd-mute, gpio)
 * `rec-test.sh` is a simple arecord input test
-* `fb.sh` installs framebuffer modules and tests the oled (ctrl-c to quit test)
 
 you'll want to set up your git environment and then clone the norns repo.  
 
-## poweroff
-
-* presently you'll need to push the buttom button to hard-power-off the unit after running `sudo shutdown now` (this will be automatic in the future)
-
 ## battery
 
-* the battery management driver is not yet installed, so there's no way to check how much battery you have left... beware! i also don't yet have an estimate on battery life, but i'm confident at low loads it will last quite a while-- but take care if unsaved work is happening on battery.
+* check battery level: `cat /sys/class/power_supply/bq27441-0/capacity`
