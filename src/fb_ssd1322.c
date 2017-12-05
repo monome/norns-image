@@ -18,6 +18,7 @@
 int init[] = {			/* Initialization for LM560G-256064 5.6" OLED display */
 	//-1, 0xFD, 0x12,		/* Unlock OLED driver IC */
 	-1, 0xAE,		/* Display OFF (blank) */
+	-1, 0xB9,		/* Select default linear grayscale */
 	-1, 0xB3, 0x91,		/* Display divide clockratio/frequency */
 	-1, 0xCA, 0x3F,		/* Multiplex ratio, 1/64, 64 COMS enabled */
 	-1, 0xA2, 0x00,		/* Set offset, the display map starting line is COM0 */
@@ -26,7 +27,7 @@ int init[] = {			/* Initialization for LM560G-256064 5.6" OLED display */
 				/*  enable nibble remap, scan from com[N-1] to COM0, disable COM split odd even */
 	-1, 0xAB, 0x01,		/* Select external VDD */
 	-1, 0xB4, 0xA0, 0xFD,	/* Display enhancement A, external VSL, enhanced low GS display quality */
-	-1, 0xC1, 0x9F,		/* Contrast current, 256 steps, default is 0x7F */
+	-1, 0xC1, 0x7F,		/* Contrast current, 256 steps, default is 0x7F */
 	-1, 0xC7, 0x0F,		/* Master contrast current, 16 steps, default is 0x0F */
 	-1, 0xB1, 0xF2,		/* Phase Length */
 	//-1, 0xD1, 0x82, 0x20	/* Display enhancement B */
@@ -83,10 +84,13 @@ static int set_gamma(struct fbtft_par *par, unsigned long *curves)
 		}
 	}
 
-	/*write_reg(par, 0xB8,
-	tmp[0], tmp[1], tmp[2], tmp[3], tmp[4], tmp[5], tmp[6], tmp[7],
-	tmp[8], tmp[9], tmp[10], tmp[11], tmp[12], tmp[13], tmp[14]);
-	*/
+	//write_reg(par, 0xB8,
+	//0,1,2,3,4,5,6,7,8,
+	//9,10,15,25,30,35);
+	//tmp[0], tmp[1], tmp[2], tmp[3], tmp[4], tmp[5], tmp[6], tmp[7],
+	//tmp[8], tmp[9], tmp[10], tmp[11], tmp[12], tmp[13], tmp[14]);
+	//write_reg(par, 0);
+	
 
 	return 0;
 }
@@ -105,8 +109,7 @@ static int blank(struct fbtft_par *par, bool on)
 #define CYR     613    /* 2.392 */
 #define CYG     601    /* 2.348 */
 #define CYB     233    /* 0.912 */
-/*
-static unsigned int rgb565_to_y(unsigned int rgb)
+/*static unsigned int rgb565_to_y(unsigned int rgb)
 {
 	rgb = cpu_to_le16(rgb);
 	return CYR * (rgb >> 11) + CYG * (rgb >> 5 & 0x3F) + CYB * (rgb & 0x1F);
@@ -130,13 +133,18 @@ static int write_vmem(struct fbtft_par *par, size_t offset, size_t len)
 	fbtft_par_dbg(DEBUG_WRITE_VMEM, par,
 		"%s(offset=0x%x bl_width=%d bl_height=%d)\n", __func__, offset, bl_width, bl_height);
 
+	//for(y=0;y<256;y++) 
+	//for(x=0,x<8;x++) 
+	//*buf++ = y>>4 | (y&0xf0);
+
 	for (y = 0; y < bl_height; y++) {
-		for (x = 0; x < bl_width/2; x++) {
-			//*buf = cpu_to_le16(rgb565_to_y(vmem16[offset++])) >> 8 & 0xF0;
-			//*buf = cpu_to_le16(vmem16[offset++]) >> 8 & 0xF0;
-			*buf++ = cpu_to_le16(vmem16[offset++]) >> 8;
-			//*buf++ |= cpu_to_le16(rgb565_to_y(vmem16[offset++])) >> 12;
-			*buf++ = cpu_to_le16(vmem16[offset++]) >> 8;
+		for (x = 0; x < bl_width; x++) {
+			//*buf++ = cpu_to_le16(rgb565_to_y(vmem16[offset++])) >> 8;
+			//int z = cpu_to_le16(rgb565_to_y(vmem16[offset++])) >> 8;
+			int z = cpu_to_le16(vmem16[offset++]) >> 8;
+			*buf++ = z>>4 | (z&0xf0); 
+			//*buf++ = cpu_to_le16(rgb565_to_y(vmem16[offset++])) >> 8;
+			//*buf++ = cpu_to_le16(vmem16[offset++]) >> 8;
 		}
 	}
 
