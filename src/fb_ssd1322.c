@@ -44,11 +44,11 @@ static void set_addr_win(struct fbtft_par *par, int xs, int ys, int xe, int ye)
 	//int offset = (480 - width) / 8;
 
 	fbtft_par_dbg(DEBUG_SET_ADDR_WIN, par, "%s(xs=%d, ys=%d, xe=%d, ye=%d)\n", __func__, xs, ys, xe, ye);
-
 	//write_reg(par, 0x15, offset, offset + (width / 4) - 1);
+	//write_reg(par, 0x15, 28 + xs,28+xe);
 	write_reg(par, 0x15, 28,91);
-	//write_reg(par, 0x75, ys, ye);
-	write_reg(par, 0x75, 0, 63);
+	write_reg(par, 0x75, ys, ye);
+	//write_reg(par, 0x75, 0, 63);
 	write_reg(par, 0x5c);
 }
 
