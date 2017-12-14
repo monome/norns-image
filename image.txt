@@ -179,4 +179,5 @@ autoload fb module
 https://github.com/alidaf/raspberryPi/blob/master/displayPi/ssd1322-spi/fbtft/ssd1322-spi-overlay.dts
 https://github.com/alidaf/raspberryPi/wiki/SSD1322(SPI)--fbtft-framebuffer-driver
 
-
+add to /etc/rc.local (before exit 0)
+	/home/pi/init-norns.sh
