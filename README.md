@@ -29,13 +29,17 @@ feel free to disconnect from `screen` (crtl-a-z)
 
 ## use
 
-some startup scripts:
+audio i/o test script:
 
-* `init-norns.sh` sets up all the un-setup bits (analog gains, fb, snd-mute, gpio)
 * `rec-test.sh` is a simple arecord input test
 
 you'll want to set up your git environment and then clone the norns repo.  
 
-## battery
+then:
 
-* check battery level: `cat /sys/class/power_supply/bq27441-0/capacity`
+```
+cd norns
+./crone.sh > /dev/null &
+./matron.sh > /dev/null &
+maiden/maiden
+```
