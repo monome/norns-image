@@ -174,10 +174,13 @@ make menuconfig
 	Frame buffer Devices --->
 	Support for small TFT LCD display modules --->
 
-still need >>>
-autoload fb module
-https://github.com/alidaf/raspberryPi/blob/master/displayPi/ssd1322-spi/fbtft/ssd1322-spi-overlay.dts
-https://github.com/alidaf/raspberryPi/wiki/SSD1322(SPI)--fbtft-framebuffer-driver
+install overlay for ssd1322
+add to config.txt
+	dtoverlay=ssd1322-spi
+
 
 add to /etc/rc.local (before exit 0)
 	/home/pi/init-norns.sh
+
+
+
