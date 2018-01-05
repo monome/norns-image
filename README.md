@@ -16,8 +16,12 @@ login is `pi` and password is `nnnn`
 
 modify /etc/wpa_supplicant/wpa_supplicant.conf with your wifi info
 
-`wpa_cli -i wlan0 reconfigure`
-`sudo systemctl restart networking.service`
+reboot.
+
+or (this doesn't work fully it seems:)
+
+* `wpa_cli -i wlan0 reconfigure`
+* `sudo systemctl restart networking.service`
 
 then check your ip address to make sure `ifconfig`
 
