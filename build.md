@@ -35,3 +35,19 @@ SSH to this IP with a new terminal from the linux computer (the terminal will wo
 * `sudo apt-get update`
 * `sudo apt-get install vim git bc i2c-tools`
 
+* get new kernel, compiled on the linux computer (see below) or from repo
+
+```
+tar xzvf image.tgz
+cd install/
+sudo cp *.dtb /boot/
+sudo cp overlays/*.dtb* /boot/overlays/
+sudo cp overlays/README /boot/overlays/
+sudo cp zImage /boot/kernel7.img
+sudo cp -R lib /
+```
+
+* clone the image repo
+* `cd norns-image/overlays`
+* `sudo ./overlay.sh`
+
