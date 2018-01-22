@@ -189,6 +189,9 @@ add to crontab
 add to /home/pi/.profile
     ~/start-matron.sh
 
+raspi-config
+    autologin console no password
+    (for .profile execution)
 
 
 
