@@ -15,3 +15,14 @@ manage one wifi connection at a time
 ## stop
 ./wifi-off.sh
 
+## hotspot
+setup:
+
+sudo cp dnsmasq.conf /etc/dnsmasq.conf
+sudo cp hostapd /etc/default/hostapd
+sudo cp hostapd.conf /etc/hostapd/hostapd.conf
+sudo cp dhcpcd.conf /etc/dhcpcd.conf
+sudo cp interfaces /etc/network/interfaces
+systemctl enable dhcpcd.service
+systemctl enable hostapd.service
+systemctl enable dnsmasq.service
