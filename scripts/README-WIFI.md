@@ -26,3 +26,13 @@ sudo cp interfaces /etc/network/interfaces
 systemctl enable dhcpcd.service
 systemctl enable hostapd.service
 systemctl enable dnsmasq.service
+
+then reboot...
+
+then to connect to the norns hotspot from my arch linux laptop...
+
+* `sudo wifi-menu`
+(select norns)
+password is nnnnnnnn
+... then, on my laptop, I also need to:
+* `sudo systemctl start dhcpcd`
