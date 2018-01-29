@@ -18,7 +18,14 @@ function all_off {
     sudo killall dhcpcd
 }
 
-if [ $1 = "on" ]; then
+if [ -n $1 ]; then
+    echo usage:
+    echo ./wifi.sh on
+    echo ./wifi.sh off
+    echo ./wifi.sh hotspot
+    echo ./wifi.sh scan
+    echo ./wifi.sh select "My Wifi SSID" "wifi-password"
+elif [ $1 = "on" ]; then
     all_off;
     wpa_boot;
     SSID=$(cat $HOME/ssid.wifi);
