@@ -38,3 +38,4 @@ sudo wpa_cli enable_network 0
 sudo wpa_cli list_networks
 sleep 5
 sudo dhcpcd
+ping monome.org
