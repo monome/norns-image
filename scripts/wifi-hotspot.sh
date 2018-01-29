@@ -1,1 +1,2 @@
-setsid bash -c "./wifi-off.sh; ./hotspot-on.sh;";
+setsid bash -c "./wifi.sh hotspot;";
+
