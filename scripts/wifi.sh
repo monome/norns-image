@@ -24,7 +24,7 @@ if [ -n $1 ]; then
     echo ./wifi.sh off
     echo ./wifi.sh hotspot
     echo ./wifi.sh scan
-    echo ./wifi.sh select "My Wifi SSID" "wifi-password"
+    echo ./wifi.sh select "\"My Wifi SSID\"" "\"wifi-password\""
 elif [ $1 = "on" ]; then
     all_off;
     wpa_boot;
