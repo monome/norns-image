@@ -211,3 +211,11 @@ systemctl enable dnsmasq.service
 
 then reboot...
 
+>> bootsplash, start norns on boot, networking after
+sudo cp config/cairotest.service /etc/systemd/system/cairotest.service
+sudo systemctl enable cairotest
+sudo systemctl disable dhcpcd.service
+sudo systemctl disable hostapd.service
+sudo systemctl disable dnsmasq.service
+cp norns-image/scripts/init-norns.sh /home/pi/init-norns.sh
+(then ensure /home/pi/init-norns.sh is called from /etc/rc.local)
