@@ -18,7 +18,7 @@ function all_off {
     sudo killall dhcpcd
 }
 
-if [ -n $1 ]; then
+if [ -d $1 ]; then
     echo usage:
     echo ./wifi.sh on
     echo ./wifi.sh off
