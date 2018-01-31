@@ -18,7 +18,7 @@ sudo apt-get update
 sudo apt-get install vim git bc i2c-tools
 
 >> transfer .dts to CM3IO from mac/etc
-scp dt-blob.dts pi@nnnn.local:~/
+scp dt-blob.dts pi@norns.local:~/
 
 >> build dts on CM3IO (norns on-button latch)
 sudo dtc -I dts -O dtb -o /boot/dt-blob.bin dt-blob.dts
@@ -194,4 +194,17 @@ raspi-config
     (for .profile execution)
 
 
+>> wifi hotspot setup
+(reference https://frillip.com/using-your-raspberry-pi-3-as-a-wifi-access-point-with-hostapd/)
+
+sudo cp config/dnsmasq.conf /etc/dnsmasq.conf
+sudo cp config/hostapd /etc/default/hostapd
+sudo cp config/hostapd.conf /etc/hostapd/hostapd.conf
+sudo cp config/dhcpcd.conf /etc/dhcpcd.conf
+sudo cp config/interfaces /etc/network/interfaces
+systemctl enable dhcpcd.service
+systemctl enable hostapd.service
+systemctl enable dnsmasq.service
+
+then reboot...
 

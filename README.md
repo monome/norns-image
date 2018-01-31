@@ -7,30 +7,29 @@
 * hold key 1 for 3 seconds
 * rear LED shows orange for power, white for disk activity
 
-## setup
+## serial connection
 
 * linux: screen /dev/ttyACM0 115200
 * mac: screen /dev/tty.ubserial(...) 115200 (fill in the serial number)
 
 login is `pi` and password is `nnnn`
 
-modify /etc/wpa_supplicant/wpa_supplicant.conf with your wifi info
-
-reboot.
-
-or (this doesn't work fully it seems:)
-
-* `wpa_cli -i wlan0 reconfigure`
-* `sudo systemctl restart networking.service`
-
-then check your ip address to make sure `ifconfig`
-
 disconnect from `screen` (crtl-a-z) 
 
-## connect
+## hotspot connect
 
-`ssh pi@nnnn.local` (provided avahi is working, or use ip address)
+norns boots by default in hotspot mode.  Connect to norns' wifi hotspot:
+SSID=norns
+PSK=nnnnnnnn
 
+`ssh pi@nnnn.local` (provided avahi is working)
+`ssh pi@172.24.1.1` (if avahi is not working)
+
+## switch norns wifi connection to external wifi network
+wifi.sh scan
+wifi.sh select "My Wifi SSID" "wifi-password"
+wifi-router.sh (helper script to reconfigure network whilst ssh-ed in)
+( wifi-hotspot.sh switches back to hotspot mode whilst ssh-ed in)
 
 ## use
 
