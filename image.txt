@@ -197,6 +197,9 @@ raspi-config
 >> wifi hotspot setup
 (reference https://frillip.com/using-your-raspberry-pi-3-as-a-wifi-access-point-with-hostapd/)
 
+sudo apt-get install dnsmasq
+sudo apt-get install hostapd
+
 sudo cp config/dnsmasq.conf /etc/dnsmasq.conf
 sudo cp config/hostapd /etc/default/hostapd
 sudo cp config/hostapd.conf /etc/hostapd/hostapd.conf
