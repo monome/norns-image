@@ -218,4 +218,5 @@ sudo systemctl disable dhcpcd.service
 sudo systemctl disable hostapd.service
 sudo systemctl disable dnsmasq.service
 cp norns-image/scripts/init-norns.sh /home/pi/init-norns.sh
+sudo rm /etc/init.d/init-norns.sh
 (then ensure /home/pi/init-norns.sh is called from /etc/rc.local)
