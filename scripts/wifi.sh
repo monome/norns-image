@@ -58,7 +58,7 @@ elif [ $1 = "on" ]; then
     sudo wpa_cli list_networks
     sleep 5
     sudo dhcpcd
-    ping monome.org
+    #ping monome.org
 elif [ $1 = "scan" ]; then
     wpa_boot;
     sudo wpa_cli scan > /dev/null;
