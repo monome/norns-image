@@ -18,18 +18,17 @@ sudo i2cset -y 1 0x28 64
 sudo i2cset -y 1 0x29 0
 sudo i2cset -y 1 0x29 64
 
-
 # unmute soundcard output
 
-amixer set Master on
-
+amixer set Master on 
 
 # enable headphone driver
 
 sudo i2cset -y 1 0x60 1 192    # enable HP outputs
-sudo i2cset -y 1 0x60 2 32     # unmute, set vol to -10db
-#echo "in" > /sys/class/gpio/gpio28/direction
+sudo i2cset -y 1 0x60 2 32     # unmute, set vol to -10db 
+#sudo i2cset -y 1 0x60 2 52     # unmute, set vol to 0.1db
 
+echo "in" > /sys/class/gpio/gpio28/direction 
 echo "both" > /sys/class/gpio/gpio28/edge
 
 echo "in" > /sys/class/gpio/gpio29/direction
@@ -56,8 +55,10 @@ echo "both" > /sys/class/gpio/gpio37/edge
 echo "in" > /sys/class/gpio/gpio39/direction
 echo "both" > /sys/class/gpio/gpio39/edge
 
-sudo i2cset -y 1 0x60 2 52     # unmute, set vol to 0.1db
+# start norns
 su pi -c "cd /home/pi/norns; ./start.sh;"
+
+# start network
 #/home/pi/norns-image/scripts/wifi.sh hotspot
 systemctl start networking.service;
 systemctl start hostapd;

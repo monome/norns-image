@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function wpa_boot {
     WPA_PS=$(ps aux | grep wpa_supplicant |grep -v grep | awk '{print $2}')
     if [ -z $WPA_PS ]; then
