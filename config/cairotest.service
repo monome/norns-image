@@ -1,0 +1,10 @@
+[Unit]
+Description=Cairo Screentest
+
+[Service]
+Type=oneshot
+ExecStart=/home/pi/cairo/cairo
+Nice=-20
+
+[Install]
+WantedBy=multi-user.target
