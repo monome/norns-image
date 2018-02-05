@@ -2,7 +2,7 @@
 
 If you soft-brick the CM3, you can attach it as a USB disk device and then change files to get it back into working order or read/write the entire disk image.
 
-!(https://github.com/tehn/norns-image/raw/master/usbboot.jpg)
+![](https://github.com/tehn/norns-image/raw/master/usbboot.jpg)
 
 to open the cm3's emmc in usb disk mode:
 
