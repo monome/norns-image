@@ -50,4 +50,57 @@ sudo cp -R lib /
 * clone the image repo
 * `cd norns-image/overlays`
 * `sudo ./overlay.sh`
+* `cd ..`
+* `sudo cp config/config.txt /boot/`
+
+
+
+
+## RT Kernel with drivers
+
+### (Linux)
+
+ref: https://www.raspberrypi.org/documentation/linux/kernel/building.md
+ref: https://autostatic.com/2017/06/27/rpi-3-and-the-real-time-kernel/
+find correct kernel: https://github.com/raspberrypi/linux/commits?author=gregkh
+patch: https://www.kernel.org/pub/linux/kernel/projects/rt/4.9/
+
+```
+git clone https://github.com/raspberrypi/tools.git
+git clone https://github.com/raspberrypi/linux.git -b rpi-4.9.y
+wget https://www.kernel.org/pub/linux/kernel/projects/rt/4.9/patch-4.9.76-rt61.patch.xz
+wget https://raw.githubusercontent.com/fedberry/kernel/master/usb-dwc_otg-fix-system-lockup-when-interrupts-are-threaded.patch
+cd linux
+git checkout 7bbc6ca4887794cc44b41412a35bdfbe0cbd1c50
+make bcm2709_defconfig
+export KERNEL=kernel7
+export ARCH=arm
+export CROSS_COMPILE=~/work/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-
+export CONCURRENCY_LEVEL=$(nproc)
+xzcat ../patch-4.9.76-rt61.patch.xz | patch -p1
+patch -i ../usb-dwc_otg-fix-system-lockup-when-interrupts-are-threaded.patch -p1
+
+monome-snd patches
+fbtft patches
+
+make menuconfig
+	Kernel Features - Preemption Model - Fully Preemptible Kernel (RT)
+	Device drivers - Power supply class support - BQ27xxx battery driver (+I2C)
+	Device Drivers > Sound Card Support > ALSA > ALSA for SoC > Support for monome-snd
+make clean
+scripts/config --disable DEBUG_INFO
+make
+mkdir ../install
+make modules_install INSTALL_MOD_PATH=../install/
+cp arch/arm/boot/zImage ../install/
+cp arch/arm/boot/dts/*.dtb ../install/
+mkdir ../install/overlays
+cp arch/arm/boot/dts/overlays/*.dtb* ../install/overlays/
+cp arch/arm/boot/dts/overlays/README ../install/overlays/
+cd ..
+tar czvf image.tgz install
+```
+
+
+
 
