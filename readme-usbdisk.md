@@ -23,3 +23,5 @@ cd usbboot
 make
 sudo ./rpiboot
 ```
+
+a disk will show up in /dev/sd?
