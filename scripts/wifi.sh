@@ -28,6 +28,10 @@ if [ -d $1 ]; then
     echo ./wifi.sh scan
     echo ./wifi.sh select "\"My Wifi SSID\"" "\"wifi-password\""
 elif [ $1 = "on" ]; then
+    if grep "initialising\|router" $HOME/status.wifi; then
+	echo "wifi.sh already running"
+	exit;
+    fi
     echo initialising wifi...> $HOME/status.wifi
     all_off;
     wpa_boot;
@@ -84,6 +88,10 @@ elif [ $1 = "select" ]; then
 	echo "usage: ./wifi.sh select \"SSID\" \"PSK\""
     fi
 elif [ $1 = "hotspot" ]; then
+    if grep "initialising\|hotspot" $HOME/status.wifi; then
+	echo "wifi.sh already running"
+	exit;
+    fi
     echo initialising hotspot... > $HOME/status.wifi
     all_off
     sudo ip addr add 172.24.1.1/255.255.255.0 \
