@@ -28,6 +28,7 @@ if [ -d $1 ]; then
     echo ./wifi.sh scan
     echo ./wifi.sh select "\"My Wifi SSID\"" "\"wifi-password\""
 elif [ $1 = "on" ]; then
+    echo initialising wifi...> $HOME/status.wifi
     all_off;
     wpa_boot;
     SSID=$(cat $HOME/ssid.wifi);
@@ -58,7 +59,8 @@ elif [ $1 = "on" ]; then
     sudo wpa_cli list_networks
     sleep 5
     sudo dhcpcd
-    #ping monome.org
+    echo router > $HOME/status.wifi
+    ping -c 1 8.8.8.8
 elif [ $1 = "scan" ]; then
     wpa_boot;
     sudo wpa_cli scan > /dev/null;
@@ -74,10 +76,13 @@ elif [ $1 = "select" ]; then
 	echo "usage: ./wifi.sh select \"SSID\" \"PSK\""
     fi
 elif [ $1 = "hotspot" ]; then
+    echo initialising hotspot... > $HOME/status.wifi
     all_off
     sudo ifup wlan0
     sudo service hostapd start
     sudo service dnsmasq start
+    echo hotspot > $HOME/status.wifi
 elif [ $1 = "off" ]; then
+    echo stopped > $HOME/status.wifi
     all_off
 fi    
