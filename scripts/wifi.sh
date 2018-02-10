@@ -1,5 +1,6 @@
 #!/bin/bash
 
+WIFI_INTERFACE=$(ip addr|grep 2: | awk '{print $2}'|sed -e s/:$//)
 function wpa_boot {
     WPA_PS=$(ps aux | grep wpa_supplicant |grep -v grep | awk '{print $2}')
     if [ -z $WPA_PS ]; then
@@ -7,13 +8,12 @@ function wpa_boot {
 	WPA_FILE=$HOME/wpa_supplicant.conf
 	echo ctrl_interface=/run/wpa_supplicant > $WPA_FILE
 	echo update_config=1 >> $WPA_FILE
-	WIFI_INTERFACE=$(ip addr|grep 2: | awk '{print $2}'|sed -e s/:$//)
 	sudo wpa_supplicant -B -i$WIFI_INTERFACE -c$WPA_FILE
     fi
 }
 
 function all_off {
-    sudo ifdown wlan0 &> /dev/null
+    sudo ip addr flush dev $WIFI_INTERFACE
     sudo service hostapd stop &> /dev/null
     sudo service dnsmasq stop &> /dev/null
     sudo killall wpa_supplicant &> /dev/null
@@ -86,7 +86,7 @@ elif [ $1 = "select" ]; then
 elif [ $1 = "hotspot" ]; then
     echo initialising hotspot... > $HOME/status.wifi
     all_off
-    sudo ifup wlan0
+    sudo ip addr add 172.24.1.1/255.255.255.0 broadcast 172.24.1.255 dev $WIFI_INTERFACE
     sudo service hostapd start
     sudo service dnsmasq start
 
@@ -99,3 +99,4 @@ elif [ $1 = "off" ]; then
     echo stopped > $HOME/status.wifi
     all_off
 fi    
+
