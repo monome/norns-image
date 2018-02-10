@@ -13,11 +13,11 @@ function wpa_boot {
 }
 
 function all_off {
-    sudo ifdown wlan0
-    sudo service hostapd stop
-    sudo service dnsmasq stop
-    sudo killall wpa_supplicant
-    sudo killall dhcpcd
+    sudo ifdown wlan0 &> /dev/null
+    sudo service hostapd stop &> /dev/null
+    sudo service dnsmasq stop &> /dev/null
+    sudo killall wpa_supplicant &> /dev/null
+    sudo killall dhcpcd &> /dev/null
 }
 
 if [ -d $1 ]; then
@@ -33,15 +33,14 @@ elif [ $1 = "on" ]; then
     wpa_boot;
     SSID=$(cat $HOME/ssid.wifi);
     PSK=$(cat $HOME/psk.wifi);
-    sudo killall dhcpcd
     # sudo wpa_cli list_networks
-    sudo wpa_cli disable_network 0
+    sudo wpa_cli disable_network 0 &> /dev/null
 
-    sudo wpa_cli remove_network 0
-    sudo wpa_cli remove_network 1
-    sudo wpa_cli remove_network 2
-    sudo wpa_cli remove_network 3
-    sudo wpa_cli remove_network 4
+    sudo wpa_cli remove_network 0 &> /dev/null
+    sudo wpa_cli remove_network 1 &> /dev/null
+    sudo wpa_cli remove_network 2 &> /dev/null
+    sudo wpa_cli remove_network 3 &> /dev/null
+    sudo wpa_cli remove_network 4 &> /dev/null
 
     sudo wpa_cli add_network
 
@@ -59,8 +58,17 @@ elif [ $1 = "on" ]; then
     sudo wpa_cli list_networks
     sleep 5
     sudo dhcpcd
-    echo router > $HOME/status.wifi
-    ping -c 1 8.8.8.8
+    gw=$(ip route |grep default |awk '{print $3}')
+    if [ -d $gw ]; then
+	    echo failed > $HOME/status.wifi
+    else
+	    ping -c 1 $gw
+	    if [ $? -ne 0 ]; then
+		    echo failed > $HOME/status.wifi
+	    else
+		    echo router > $HOME/status.wifi
+	    fi
+    fi
 elif [ $1 = "scan" ]; then
     wpa_boot;
     sudo wpa_cli scan > /dev/null;
@@ -81,7 +89,12 @@ elif [ $1 = "hotspot" ]; then
     sudo ifup wlan0
     sudo service hostapd start
     sudo service dnsmasq start
-    echo hotspot > $HOME/status.wifi
+
+    if [ $? -ne 0 ]; then
+	    echo failed > $HOME/status.wifi
+    else
+	    echo hotspot > $HOME/status.wifi
+    fi
 elif [ $1 = "off" ]; then
     echo stopped > $HOME/status.wifi
     all_off
