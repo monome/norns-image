@@ -59,8 +59,4 @@ echo "both" > /sys/class/gpio/gpio39/edge
 su pi -c "cd /home/pi/norns; ./start.sh;"
 
 # start network
-#/home/pi/norns-image/scripts/wifi.sh hotspot
-systemctl start networking.service;
-systemctl start hostapd;
-systemctl start dnsmasq;
-systemctl start dhcpcd;
+/home/pi/norns-image/scripts/wifi.sh hotspot
