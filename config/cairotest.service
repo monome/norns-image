@@ -1,10 +1,15 @@
 [Unit]
 Description=Cairo Screentest
+#DefaultDependencies=false
+DefaultDependencies=no
+After=local-fs.target
 
 [Service]
-Type=oneshot
+Type=simple
 ExecStart=/home/pi/cairo/cairo
 Nice=-20
 
 [Install]
-WantedBy=multi-user.target
+#After=basic.target
+#WantedBy=multiuser.target
+WantedBy=sysinit.target
