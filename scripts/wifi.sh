@@ -13,11 +13,11 @@ function wpa_boot {
 }
 
 function all_off {
-    sudo ip addr flush dev $WIFI_INTERFACE
     sudo service hostapd stop &> /dev/null
     sudo service dnsmasq stop &> /dev/null
     sudo killall wpa_supplicant &> /dev/null
     sudo killall dhcpcd &> /dev/null
+    sudo ip addr flush dev $WIFI_INTERFACE
 }
 
 if [ -d $1 ]; then
@@ -86,7 +86,8 @@ elif [ $1 = "select" ]; then
 elif [ $1 = "hotspot" ]; then
     echo initialising hotspot... > $HOME/status.wifi
     all_off
-    sudo ip addr add 172.24.1.1/255.255.255.0 broadcast 172.24.1.255 dev $WIFI_INTERFACE
+    sudo ip addr add 172.24.1.1/255.255.255.0 \
+            broadcast 172.24.1.255 dev $WIFI_INTERFACE
     sudo service hostapd start
     sudo service dnsmasq start
 
@@ -98,5 +99,13 @@ elif [ $1 = "hotspot" ]; then
 elif [ $1 = "off" ]; then
     echo stopped > $HOME/status.wifi
     all_off
-fi    
+else
+    echo invalid command: $1
+    echo usage:
+    echo ./wifi.sh on
+    echo ./wifi.sh off
+    echo ./wifi.sh hotspot
+    echo ./wifi.sh scan
+    echo ./wifi.sh select "\"My Wifi SSID\"" "\"wifi-password\""
+fi
 
