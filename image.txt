@@ -89,22 +89,13 @@ sudo reboot now
 
 
 >> on norns (jack)
-sudo apt-get install libsamplerate0-dev libjack-jackd2-dev libsndfile1-dev libasound2-dev libavahi-client-dev libicu-dev libreadline-dev libfftw3-dev libxt-dev libudev-dev libcwiid-dev cmake git
-git clone git://github.com/jackaudio/jack2 --depth 1
-cd jack2
-./waf configure --alsa --libdir=/usr/lib/arm-linux-gnueabihf/
-./waf build
-sudo ./waf install
-sudo ldconfig
-cd ..
-rm -rf jack2
-sudo vim /etc/security/limits.conf
-	@audio - memlock 256000
- 	@audio - rtprio 75
+sudo apt-get install --no-install-recommends jackd2
 vim ~/.jackdrc
-	/usr/local/bin/jackd -P75 -dalsa -dhw:0 -p256 -n3 -s -S -r48000
+	/usr/bin/jackd -P75 -dalsa -dhw:0 -p256 -n3 -s -S -r48000
+jackd needs to be started with `JACK_NO_AUDIO_RESERVATION=1` env variable, so don't forget to set this as well.
 
 >> (supercollider)
+sudo apt-get install libsamplerate0-dev libjack-jackd2-dev libsndfile1-dev libasound2-dev libavahi-client-dev libicu-dev libreadline-dev libfftw3-dev libxt-dev libudev-dev libcwiid-dev cmake git
 	ref: http://supercollider.github.io/development/building-raspberrypi
 git clone --recursive git://github.com/supercollider/supercollider
 cd supercollider
