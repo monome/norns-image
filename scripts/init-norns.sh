@@ -58,5 +58,6 @@ echo "both" > /sys/class/gpio/gpio39/edge
 # start norns
 su pi -c "cd /home/pi/norns; ./start.sh;"
 
-# start network
-/home/pi/norns-image/scripts/wifi.sh hotspot
+# clean up stale wifi status from shutdown
+echo stopped > $HOME/status.wifi
+
