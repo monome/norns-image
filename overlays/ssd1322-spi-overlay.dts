@@ -2,7 +2,7 @@
 Device Tree overlay for SSD1322 SPI controller.
 
 Default pins:
-DC#		 = GPIO7
+DC#		 = GPIO5
 RESET# = GPIO6
 
 */
@@ -52,7 +52,7 @@ RESET# = GPIO6
 
       ssd1322: ssd1322@0 {
         compatible = "solomon,ssd1322";
-        reg = <0>; 
+        reg = <0>;
         pinctrl-names = "default";
         pinctrl-0 = <&ssd1322_pins>;
 
