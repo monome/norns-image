@@ -18,9 +18,11 @@ Disconnect the boot USB port. Reset the norns with the bottom switch. Insert wif
 
 ### (Norns)
 
+login is "pi" with password "raspberry"
+
 * `sudo raspi-config`
 
-1. Change password
+1. Change password: nnnn
 2. Network > Hostname (norns)
 3. Network > Wifi (set SSID/password)
 4. Interfacing > SSH (on)
@@ -37,15 +39,22 @@ SSH to this IP with a new terminal from the linux computer (the terminal will wo
 
 * get new kernel, compiled on the linux computer (see below) or from repo
 
+below using: https://monome.nyc3.digitaloceanspaces.com/kernel-180215.tar.gz
+
 ```
-tar xzvf image.tgz
-cd install/
-sudo cp *.dtb /boot/
-sudo cp overlays/*.dtb* /boot/overlays/
-sudo cp overlays/README /boot/overlays/
-sudo cp zImage /boot/kernel7.img
+wget https://monome.nyc3.digitaloceanspaces.com/kernel-180215.tar.gz
+tar xzvf kernel-180215.tar.gz
+sudo cp -R boot/* /boot/
 sudo cp -R lib /
 ```
+
+reboot
+
+`sudo reboot now`
+
+
+--- STOP ---
+
 
 * clone the image repo
 * `cd norns-image/overlays`
