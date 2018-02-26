@@ -92,7 +92,7 @@ sudo reboot now
 curl https://keybase.io/artfwo/pgp_keys.asc | sudo apt-key add -
 echo "deb http://norns.catfact.net/ debian/" | sudo tee /etc/apt/sources.list.d/norns.list
 sudo apt update
-sudo apt install libmonome-dev libnanomsg-dev supercollider-language supercollider-server supercollider-dev
+sudo apt install libmonome-dev libnanomsg-dev supercollider-language supercollider-server supercollider-dev liblua5.3-dev
 
 >> norns
 git clone https://github.com/tehn/norns.git
