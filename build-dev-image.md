@@ -48,10 +48,19 @@ sudo cp -R boot/* /boot/
 sudo cp -R lib /
 ```
 
+get config.txt, copy to boot
+
+```
+wget https://monome.nyc3.digitaloceanspaces.com/config.txt
+sudo mv config.txt /boot/
+```
+
 reboot
 
 `sudo reboot now`
 
+
+you can now turn off the "always-on" switch
 
 --- STOP ---
 
