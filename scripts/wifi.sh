@@ -1,5 +1,6 @@
 #!/bin/bash
 
+WIFI_INTERFACE=$(ip addr|grep 2: | awk '{print $2}'|sed -e s/:$//)
 function wpa_boot {
     WPA_PS=$(ps aux | grep wpa_supplicant |grep -v grep | awk '{print $2}')
     if [ -z $WPA_PS ]; then
@@ -7,17 +8,16 @@ function wpa_boot {
 	WPA_FILE=$HOME/wpa_supplicant.conf
 	echo ctrl_interface=/run/wpa_supplicant > $WPA_FILE
 	echo update_config=1 >> $WPA_FILE
-	WIFI_INTERFACE=$(ip addr|grep 2: | awk '{print $2}'|sed -e s/:$//)
 	sudo wpa_supplicant -B -i$WIFI_INTERFACE -c$WPA_FILE
     fi
 }
 
 function all_off {
-    sudo ifdown wlan0
-    sudo service hostapd stop
-    sudo service dnsmasq stop
-    sudo killall wpa_supplicant
-    sudo killall dhcpcd
+    sudo service hostapd stop &> /dev/null
+    sudo service dnsmasq stop &> /dev/null
+    sudo killall wpa_supplicant &> /dev/null
+    sudo killall dhcpcd &> /dev/null
+    sudo ip addr flush dev $WIFI_INTERFACE
 }
 
 if [ -d $1 ]; then
@@ -28,19 +28,23 @@ if [ -d $1 ]; then
     echo ./wifi.sh scan
     echo ./wifi.sh select "\"My Wifi SSID\"" "\"wifi-password\""
 elif [ $1 = "on" ]; then
+    if grep "initialising\|router" $HOME/status.wifi; then
+	echo "wifi.sh already running"
+	exit;
+    fi
+    echo initialising wifi...> $HOME/status.wifi
     all_off;
     wpa_boot;
     SSID=$(cat $HOME/ssid.wifi);
     PSK=$(cat $HOME/psk.wifi);
-    sudo killall dhcpcd
     # sudo wpa_cli list_networks
-    sudo wpa_cli disable_network 0
+    sudo wpa_cli disable_network 0 &> /dev/null
 
-    sudo wpa_cli remove_network 0
-    sudo wpa_cli remove_network 1
-    sudo wpa_cli remove_network 2
-    sudo wpa_cli remove_network 3
-    sudo wpa_cli remove_network 4
+    sudo wpa_cli remove_network 0 &> /dev/null
+    sudo wpa_cli remove_network 1 &> /dev/null
+    sudo wpa_cli remove_network 2 &> /dev/null
+    sudo wpa_cli remove_network 3 &> /dev/null
+    sudo wpa_cli remove_network 4 &> /dev/null
 
     sudo wpa_cli add_network
 
@@ -58,7 +62,17 @@ elif [ $1 = "on" ]; then
     sudo wpa_cli list_networks
     sleep 5
     sudo dhcpcd
-    #ping monome.org
+    gw=$(ip route |grep default |awk '{print $3}')
+    if [ -d $gw ]; then
+	    echo failed > $HOME/status.wifi
+    else
+	    ping -c 1 $gw
+	    if [ $? -ne 0 ]; then
+		    echo failed > $HOME/status.wifi
+	    else
+		    echo router > $HOME/status.wifi
+	    fi
+    fi
 elif [ $1 = "scan" ]; then
     wpa_boot;
     sudo wpa_cli scan > /dev/null;
@@ -74,10 +88,32 @@ elif [ $1 = "select" ]; then
 	echo "usage: ./wifi.sh select \"SSID\" \"PSK\""
     fi
 elif [ $1 = "hotspot" ]; then
+    if grep "initialising\|hotspot" $HOME/status.wifi; then
+	echo "wifi.sh already running"
+	exit;
+    fi
+    echo initialising hotspot... > $HOME/status.wifi
     all_off
-    sudo ifup wlan0
+    sudo ip addr add 172.24.1.1/255.255.255.0 \
+            broadcast 172.24.1.255 dev $WIFI_INTERFACE
     sudo service hostapd start
     sudo service dnsmasq start
+
+    if [ $? -ne 0 ]; then
+	    echo failed > $HOME/status.wifi
+    else
+	    echo hotspot > $HOME/status.wifi
+    fi
 elif [ $1 = "off" ]; then
+    echo stopped > $HOME/status.wifi
     all_off
-fi    
+else
+    echo invalid command: $1
+    echo usage:
+    echo ./wifi.sh on
+    echo ./wifi.sh off
+    echo ./wifi.sh hotspot
+    echo ./wifi.sh scan
+    echo ./wifi.sh select "\"My Wifi SSID\"" "\"wifi-password\""
+fi
+

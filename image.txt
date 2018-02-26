@@ -88,52 +88,11 @@ sudo cp bq24771.dtbo /boot/overlays
 sudo reboot now
 
 
->> on norns (jack)
-sudo apt-get install libsamplerate0-dev libjack-jackd2-dev libsndfile1-dev libasound2-dev libavahi-client-dev libicu-dev libreadline-dev libfftw3-dev libxt-dev libudev-dev libcwiid-dev cmake git
-git clone git://github.com/jackaudio/jack2 --depth 1
-cd jack2
-./waf configure --alsa --libdir=/usr/lib/arm-linux-gnueabihf/
-./waf build
-sudo ./waf install
-sudo ldconfig
-cd ..
-rm -rf jack2
-sudo vim /etc/security/limits.conf
-	@audio - memlock 256000
- 	@audio - rtprio 75
-vim ~/.jackdrc
-	/usr/local/bin/jackd -P75 -dalsa -dhw:0 -p256 -n3 -s -S -r48000
-
->> (supercollider)
-	ref: http://supercollider.github.io/development/building-raspberrypi
-git clone --recursive git://github.com/supercollider/supercollider
-cd supercollider
-git checkout 3.9
-git submodule init && git submodule update
-vim lang/LangSource/SC_TerminalClient.cpp
-	//mTimer.cancel();
- 	if (error==boost::system::errc::success) {mTimer.cancel();} else {return;}
-mkdir build && cd build
-cmake -L -DCMAKE_BUILD_TYPE="Release" -DBUILD_TESTING=OFF -DSUPERNOVA=OFF -DNATIVE=ON -DSC_WII=ON -DSC_IDE=OFF -DSC_QT=OFF -DSC_ED=OFF -DSC_EL=OFF -DSC_VIM=ON ..
-make -j 4
-sudo make install
-sudo ldconfig
-sudo mv /usr/local/share/SuperCollider/SCClassLibrary/Common/GUI /usr/local/share/SuperCollider/SCClassLibrary/scide_scqt/GUI
-sudo mv /usr/local/share/SuperCollider/SCClassLibrary/JITLib/GUI /usr/local/share/SuperCollider/SCClassLibrary/scide_scqt/JITLibGUI
-
->> libmonome
-sudo apt-get install cmake libevdev-dev liblo-dev libncurses-dev libncursesw5-dev libreadline-dev libudev-dev 
-git clone https://github.com/monome/libmonome
-./waf configure
-./waf
-sudo ./waf install
-
->> nanomsg
-git clone https://github.com/nanomsg/nanomsg.git
-./configure
-make
-sudo make install
-sudo ldconfig
+>> on norns (dependencies)
+curl https://keybase.io/artfwo/pgp_keys.asc | sudo apt-key add -
+echo "deb http://norns.catfact.net/ debian/" | sudo tee /etc/apt/sources.list.d/norns.list
+sudo apt update
+sudo apt install libmonome-dev libnanomsg-dev supercollider-language supercollider-server supercollider-dev liblua5.3-dev
 
 >> norns
 git clone https://github.com/tehn/norns.git
@@ -205,18 +164,15 @@ sudo cp config/hostapd /etc/default/hostapd
 sudo cp config/hostapd.conf /etc/hostapd/hostapd.conf
 sudo cp config/dhcpcd.conf /etc/dhcpcd.conf
 sudo cp config/interfaces /etc/network/interfaces
-systemctl enable dhcpcd.service
-systemctl enable hostapd.service
-systemctl enable dnsmasq.service
+systemctl disable dhcpcd.service
+systemctl disable hostapd.service
+systemctl disable dnsmasq.service
 
 then reboot...
 
 >> bootsplash, start norns on boot, networking after
 sudo cp config/cairotest.service /etc/systemd/system/cairotest.service
 sudo systemctl enable cairotest
-sudo systemctl disable dhcpcd.service
-sudo systemctl disable hostapd.service
-sudo systemctl disable dnsmasq.service
 cp norns-image/scripts/init-norns.sh /home/pi/init-norns.sh
 sudo rm /etc/init.d/init-norns.sh
 (then ensure /home/pi/init-norns.sh is called from /etc/rc.local)
