@@ -62,17 +62,33 @@ reboot
 
 you can now turn off the "always-on" switch
 
---- STOP ---
+
+get jackdrc
+
+```
+wget https://monome.nyc3.digitaloceanspaces.com/.jackdrc
+```
+
+set up realtime
+
+```
+sudo groupadd realtime
+sudo usermod -a -G realtime pi
+```
+
+add to `/etc/security/limits.d/99-realtime.conf`
+
+```
+@realtime - rtprio 99
+@realtime - memlock unlimited
+```
 
 
-* clone the image repo
-* `cd norns-image/overlays`
-* `sudo ./overlay.sh`
-* `cd ..`
-* `sudo cp config/config.txt /boot/`
 
 
 
+
+---- STOP ----
 
 ## RT Kernel with drivers
 
