@@ -30,7 +30,7 @@ login is "pi" with password "raspberry"
 6. Localization > (all)
 7. Exit, Reboot
 
-* check IP address (`ifconfig`) 
+* check IP address (`ifconfig`)
 
 SSH to this IP with a new terminal from the linux computer (the terminal will work better).
 
@@ -43,9 +43,7 @@ below using: https://monome.nyc3.digitaloceanspaces.com/kernel-4.9.59-rt52-0.0.2
 
 ```
 wget https://monome.nyc3.digitaloceanspaces.com/kernel-4.9.59-rt52-0.0.2.tar.gz
-tar xzvf kernel-4.9.59-rt52-0.0.2.tar.gz
-sudo cp -R boot/* /boot/
-sudo cp -R lib /
+sudo tar -xvzf kernel-4.9.59-rt52-0.0.2.tar.gz -C /
 ```
 
 get config.txt and dt-blob.bin, copy to boot
@@ -120,7 +118,3 @@ cp arch/arm/boot/dts/overlays/README ../install/overlays/
 cd ..
 tar czvf image.tgz install
 ```
-
-
-
-
