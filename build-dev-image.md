@@ -39,20 +39,22 @@ SSH to this IP with a new terminal from the linux computer (the terminal will wo
 
 * get new kernel, compiled on the linux computer (see below) or from repo
 
-below using: https://monome.nyc3.digitaloceanspaces.com/kernel-180215.tar.gz
+below using: https://monome.nyc3.digitaloceanspaces.com/kernel-4.9.59-rt52-0.0.2.tar.gz
 
 ```
-wget https://monome.nyc3.digitaloceanspaces.com/kernel-180215.tar.gz
-tar xzvf kernel-180215.tar.gz
+wget https://monome.nyc3.digitaloceanspaces.com/kernel-4.9.59-rt52-0.0.2.tar.gz
+tar xzvf kernel-4.9.59-rt52-0.0.2.tar.gz
 sudo cp -R boot/* /boot/
 sudo cp -R lib /
 ```
 
-get config.txt, copy to boot
+get config.txt and dt-blob.bin, copy to boot
 
 ```
 wget https://monome.nyc3.digitaloceanspaces.com/config.txt
 sudo mv config.txt /boot/
+wget https://monome.nyc3.digitaloceanspaces.com/dt-blob.bin
+sudo mv dt-blob.bin /boot/
 ```
 
 reboot
