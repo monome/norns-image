@@ -83,6 +83,26 @@ add to `/etc/security/limits.d/99-realtime.conf`
 @realtime - memlock unlimited
 ```
 
+install
+```
+curl https://keybase.io/artfwo/pgp_keys.asc | sudo apt-key add -
+echo "deb http://norns.catfact.net/ debian/" | sudo tee /etc/apt/sources.list.d/norns.list
+sudo apt update
+sudo apt install libmonome-dev libnanomsg-dev supercollider-language supercollider-server supercollider-dev liblua5.3-dev libudev-dev libevdev-dev liblo-dev libcairo2-dev
+```
+
+(set up your git)
+
+(clone your norns git)
+
+norns
+```
+./waf configure
+./waf
+./sc/install.sh
+```
+
+
 
 
 
