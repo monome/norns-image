@@ -43,7 +43,7 @@ below using: https://monome.nyc3.digitaloceanspaces.com/kernel-4.9.59-rt52-0.0.3
 
 ```
 wget https://monome.nyc3.digitaloceanspaces.com/kernel-4.9.59-rt52-0.0.3.tar.gz
-sudo tar -xvzf kernel-4.9.59-rt52-0.0.2.tar.gz -C /
+sudo tar -xvzf kernel-4.9.59-rt52-0.0.3.tar.gz -C /
 ```
 
 get config.txt and dt-blob.bin, copy to boot
@@ -54,6 +54,8 @@ sudo mv config.txt /boot/
 wget https://monome.nyc3.digitaloceanspaces.com/dt-blob.bin
 sudo mv dt-blob.bin /boot/
 ```
+
+update `/boot/config.txt` and point `kernel` to the new kernel name, for example `kernel-4.9.59-rt52-0.0.3.img` (which was installed above)
 
 reboot
 
