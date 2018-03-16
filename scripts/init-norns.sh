@@ -10,27 +10,28 @@ echo "36" > /sys/class/gpio/export
 echo "37" > /sys/class/gpio/export
 echo "39" > /sys/class/gpio/export
 
+# turn analog gain stages to unity
+# note this gain stage is only applicable to round 1 prototypes
+# this will throw an error on others.
+# Channel 0 0000 0000
+sudo i2cset -y 1 0x28 0x00
+# Channel 1 0100 0000
+sudo i2cset -y 1 0x28 0x40
 
-# turn analog gain stages to unity 
-# below is for output ch 1/2. note this gain stage isn't present on production models.
-# only applicable to round 1 prototypes. this will throw an error on others.
-sudo i2cset -y 1 0x28 0
-sudo i2cset -y 1 0x28 64
-
-# input gain stage. the default is mute so we skip this. we let matron turn it on. 
+# input gain stage. the default is mute so we skip this. we let matron turn it on.
 # but the values below are sane defaults otherwise (unity gain)
 #sudo i2cset -y 1 0x29 16
 #sudo i2cset -y 1 0x29 80
 
-# unmute soundcard output 
-amixer set Master on 
+# unmute soundcard output
+amixer set Master on
 
-# enable headphone driver 
+# enable headphone driver
 sudo i2cset -y 1 0x60 1 192    # enable HP outputs
-sudo i2cset -y 1 0x60 2 32     # unmute, set vol to -10db 
+sudo i2cset -y 1 0x60 2 32     # unmute, set vol to -10db
 #sudo i2cset -y 1 0x60 2 52     # unmute, set vol to 0.1db
 
-echo "in" > /sys/class/gpio/gpio28/direction 
+echo "in" > /sys/class/gpio/gpio28/direction
 echo "both" > /sys/class/gpio/gpio28/edge
 
 echo "in" > /sys/class/gpio/gpio29/direction
@@ -61,4 +62,4 @@ echo "both" > /sys/class/gpio/gpio39/edge
 #su pi -c "cd /home/pi/norns; ./start.sh;"
 
 # clean up stale wifi status from shutdown
-echo stopped > $HOME/status.wifi 
+echo stopped > $HOME/status.wifi
