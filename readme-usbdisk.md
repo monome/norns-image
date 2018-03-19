@@ -24,4 +24,12 @@ make
 sudo ./rpiboot
 ```
 
-a disk will show up in /dev/sd?
+a disk will show up in /dev/sd? (mine is normally `/dev/sdb`)
+
+to copy image _to_ norns:
+
+```
+sudo dd if=image.img of=/dev/sdb bs=4M status=progress
+```
+
+reverse of/if to copy _from_ norns
