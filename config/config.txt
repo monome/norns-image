@@ -63,7 +63,7 @@ enable_uart=1
 dtoverlay=i2s-mmap
 
 # Enable monome-snd (loads snd_soc_monome)
-dtoverlay=monome
+dtoverlay=monome-snd
 
 dtoverlay=bq27441
 
