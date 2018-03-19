@@ -17,6 +17,6 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-/home/pi/init-norns.sh
+/home/pi/norns-image/scripts/init-norns.sh
 
 exit 0
