@@ -24,7 +24,7 @@ sudo i2cset -y 1 0x28 0x40
 #sudo i2cset -y 1 0x29 80
 
 # unmute soundcard output
-amixer set Master on
+amixer set Master 100% on
 
 # enable headphone driver
 sudo i2cset -y 1 0x60 1 192    # enable HP outputs
@@ -59,7 +59,10 @@ echo "in" > /sys/class/gpio/gpio39/direction
 echo "both" > /sys/class/gpio/gpio39/edge
 
 # start norns
-#su pi -c "cd /home/pi/norns; ./start.sh;"
+su pi -c "cd /home/pi/norns; ./start.sh;"
+
+# start maiden
+su pi -c "cd /home/pi/maiden; ./start.sh;"
 
 # clean up stale wifi status from shutdown
 echo stopped > $HOME/status.wifi
