@@ -1,6 +1,7 @@
 #setup
 sudo cp config/cmdline.txt /boot/
 sudo cp config/jackdrc ~/.jackdrc
+sudo cp config/rc.local /etc/
 
 #realtime group
 sudo groupadd realtime
