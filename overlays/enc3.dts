@@ -1,0 +1,41 @@
+/dts-v1/;								
+/plugin/;								
+									
+/ {									
+    compatible = "brcm,bcm2835", "brcm,bcm2708", "brcm,bcm2709";	
+									
+    fragment@0 {							
+        target-path = "/soc/gpio";					
+        __overlay__ {							
+            knob_pins3: knob_pins3 {					
+                brcm,pins = <36 37>;					
+                brcm,function = <0>;					
+                brcm,pull = <2>;					
+            };								
+        };								
+    };									
+									
+    fragment@1 {							
+        target-path = "/soc";						
+        __overlay__ {							
+            knob0: knob3 {						
+                compatible = "rotary-encoder";				
+                #address-cells = <1>;					
+                #size-cells = <0>;					
+                pinctrl-names = "default";				
+                pinctrl-0 = <&knob_pins3>;				
+                gpios = <&gpio 36 1>, <&gpio 37 1>; 			
+                linux,axis = <0>; /* REL_X */				
+                rotary-encoder,relative-axis;				
+            };								
+        };								
+    };									
+    //__overrides__ {							
+        //relative_axis =  <&knob>,"rotary-encoder,relative-axis";	
+        //linux_axis =  <&knob>,"linux,axis";				
+        //rollover =  <&knob>,"rotary-encoder,rollover";			
+        //half-period =  <&knob>,"rotary-encoder,half-period";		
+        //steps =  <&knob>,"rotary-encoder,steps";			
+    //};									
+};
+
