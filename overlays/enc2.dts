@@ -27,6 +27,7 @@
                 gpios = <&gpio 32 1>, <&gpio 33 1>; 			
                 linux,axis = <0>; /* REL_X */				
                 rotary-encoder,relative-axis;				
+		rotary-encoder,half-period;
             };								
         };								
     };									
