@@ -70,3 +70,8 @@ dtoverlay=bq27441
 dtoverlay=gpio-poweroff:gpiopin=12,active_low=1
 
 dtoverlay=ssd1322-spi
+
+dtoverlay=enc1
+dtoverlay=enc2
+dtoverlay=enc3
+dtoverlay=keys
