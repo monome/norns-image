@@ -79,6 +79,7 @@ install norns
 curl https://keybase.io/artfwo/pgp_keys.asc | sudo apt-key add -
 echo "deb http://norns.catfact.net/ debian/" | sudo tee /etc/apt/sources.list.d/norns.list
 sudo apt update
+sudo apt install --no-install-recommends jackd2
 sudo apt install libmonome-dev libnanomsg-dev supercollider-language supercollider-server supercollider-dev liblua5.3-dev libudev-dev libevdev-dev liblo-dev libcairo2-dev liblua5.3-dev libavahi-compat-libdnssd-dev libasound2-dev dnsmasq hostapd
 ```
 
