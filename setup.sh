@@ -1,7 +1,7 @@
 #setup
 sudo cp config/cmdline.txt /boot/
-sudo cp config/jackdrc ~/.jackdrc
 sudo cp config/rc.local /etc/
+sudo cp --remove-destination config/norns-jack.service /etc/systemd/system/norns-jack.service
 
 #wifi hotspot
 sudo cp config/dnsmasq.conf /etc/dnsmasq.conf
@@ -12,3 +12,4 @@ sudo cp config/interfaces /etc/network/interfaces
 sudo systemctl disable dhcpcd.service
 sudo systemctl disable hostapd.service
 sudo systemctl disable dnsmasq.service
+sudo systemctl enable norns-jack.service
