@@ -57,6 +57,18 @@ sudo mv dt-blob.bin /boot/
 
 update `/boot/config.txt` and point `kernel` to the new kernel name, for example `kernel-4.9.59-rt52-0.0.3.img` (which was installed above)
 
+disable swap
+```
+sudo apt purge dphys-swapfile
+sudo swapoff -a
+sudo rm /var/swap
+```
+remove packages that affect boot speed
+```
+sudo apt purge exim4-* nfs-common triggerhappy
+sudo apt --purge autoremove
+```
+
 reboot
 
 `sudo reboot now`
