@@ -1,9 +1,13 @@
-#setup
+# Remove unused packages
+sudo apt-get purge -y triggerhappy
+sudo apt-get autoremove -y
+
+# setup
 sudo cp config/cmdline.txt /boot/
 sudo cp config/rc.local /etc/
 sudo cp --remove-destination config/norns-jack.service /etc/systemd/system/norns-jack.service
 
-#wifi hotspot
+# wifi hotspot
 sudo cp config/dnsmasq.conf /etc/dnsmasq.conf
 sudo cp config/hostapd /etc/default/hostapd
 sudo cp config/hostapd.conf /etc/hostapd/hostapd.conf
