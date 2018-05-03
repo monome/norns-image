@@ -12,4 +12,10 @@ sudo cp config/interfaces /etc/network/interfaces
 sudo systemctl disable dhcpcd.service
 sudo systemctl disable hostapd.service
 sudo systemctl disable dnsmasq.service
+
+sudo systemctl mask plymouth-read-write.service
+sudo systemctl mask plymouth-start.service
+sudo systemctl mask plymouth-quit.service
+sudo systemctl mask plymouth-quit-wait.service
+
 sudo systemctl enable norns-jack.service
