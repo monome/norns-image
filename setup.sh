@@ -1,6 +1,6 @@
 # Remove unused packages
 sudo apt-get purge -y triggerhappy
-sudo apt-get autoremove -y
+sudo apt-get autoremove -y --purge
 
 # setup
 sudo cp config/cmdline.txt /boot/
