@@ -10,8 +10,8 @@ sudo i2cset -y 1 0x28 0x40
 
 # input gain stage. the default is mute so we skip this. we let matron turn it on.
 # but the values below are sane defaults otherwise (unity gain)
-#sudo i2cset -y 1 0x29 16
-#sudo i2cset -y 1 0x29 80
+sudo i2cset -y 1 0x29 0x00
+sudo i2cset -y 1 0x29 0x40
 
 # unmute soundcard output
 amixer set Master 100% on
