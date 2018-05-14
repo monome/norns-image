@@ -22,10 +22,10 @@ amixer set Master 100% on
 #sudo i2cset -y 1 0x60 2 52     # unmute, set vol to 0.1db
 
 # start norns
-su pi -c "cd /home/pi/norns; ./start.sh;"
+su we -c "cd /home/we/norns; ./start.sh;"
 
 # start maiden
-su pi -c "cd /home/pi/maiden; ./start.sh;"
+su we -c "cd /home/we/maiden; ./start.sh;"
 
 # clean up stale wifi status from shutdown
 echo stopped > $HOME/status.wifi

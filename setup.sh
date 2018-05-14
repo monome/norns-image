@@ -1,3 +1,6 @@
+# install needed packages
+sudo apt-get install hostapd
+
 # Remove unused packages
 sudo apt-get purge -y triggerhappy
 sudo apt-get autoremove -y --purge
@@ -23,3 +26,13 @@ sudo systemctl mask plymouth-quit.service
 sudo systemctl mask plymouth-quit-wait.service
 
 sudo systemctl enable norns-jack.service
+
+# disable swap
+sudo apt purge dphys-swapfile
+sudo swapoff -a
+sudo rm /var/swap
+
+# speed up boot
+sudo apt purge exim4-* nfs-common triggerhappy
+sudo apt --purge autoremove
+

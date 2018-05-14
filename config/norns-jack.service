@@ -2,8 +2,8 @@
 After=sound.target
 
 [Service]
-User=pi
-Group=pi
+User=we
+Group=we
 Environment="JACK_NO_AUDIO_RESERVATION=1"
 LimitRTPRIO=95
 LimitMEMLOCK=infinity
