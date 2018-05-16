@@ -107,3 +107,13 @@ cd sc
 ``` 
 
 reboot, norns should boot up.
+
+
+set up `usbmount` for SYNC/etc via menu:
+
+   (1) the 'usbmount' package is installed
+       apt-get install usbmount
+
+   (2) MountFlags has been tweaked in systemd-udevd.service
+       https://www.raspberrypi.org/forums/viewtopic.php?t=205016
+       (change MountFlags=slave to MountFlags=shared)
