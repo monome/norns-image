@@ -20,10 +20,15 @@ sudo systemctl disable dhcpcd.service
 sudo systemctl disable hostapd.service
 sudo systemctl disable dnsmasq.service
 
+# Plymouth
 sudo systemctl mask plymouth-read-write.service
 sudo systemctl mask plymouth-start.service
 sudo systemctl mask plymouth-quit.service
 sudo systemctl mask plymouth-quit-wait.service
+
+# Apt timers
+sudo systemctl mask apt-daily.timer
+sudo systemctl mask apt-daily-upgrade.timer
 
 sudo systemctl enable norns-jack.service
 
@@ -35,4 +40,3 @@ sudo rm /var/swap
 # speed up boot
 sudo apt purge exim4-* nfs-common triggerhappy
 sudo apt --purge autoremove
-
