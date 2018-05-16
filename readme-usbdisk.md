@@ -30,6 +30,7 @@ to copy image _to_ norns:
 
 ```
 sudo dd if=image.img of=/dev/sdb bs=4M status=progress
+sync
 ```
 
 reverse of/if to copy _from_ norns
