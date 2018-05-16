@@ -7,8 +7,15 @@ sudo apt-get autoremove -y --purge
 
 # setup
 sudo cp config/cmdline.txt /boot/
-sudo cp config/rc.local /etc/
+
+sudo cp --remove-destination config/norns-crone.service /etc/systemd/system/norns-crone.service
+sudo cp --remove-destination config/norns-init.service /etc/systemd/system/norns-init.service
 sudo cp --remove-destination config/norns-jack.service /etc/systemd/system/norns-jack.service
+sudo cp --remove-destination config/norns-maiden.service /etc/systemd/system/norns-maiden.service
+sudo cp --remove-destination config/norns-matron.service /etc/systemd/system/norns-matron.service
+sudo cp --remove-destination config/norns.target /etc/systemd/system/norns.target
+sudo systemctl isolate norns.target
+sudo ln -sf /etc/systemd/system/norns.target /etc/systemd/system/default.target
 
 # wifi hotspot
 sudo cp config/dnsmasq.conf /etc/dnsmasq.conf
@@ -25,8 +32,6 @@ sudo systemctl mask plymouth-start.service
 sudo systemctl mask plymouth-quit.service
 sudo systemctl mask plymouth-quit-wait.service
 
-sudo systemctl enable norns-jack.service
-
 # disable swap
 sudo apt purge dphys-swapfile
 sudo swapoff -a
@@ -35,4 +40,3 @@ sudo rm /var/swap
 # speed up boot
 sudo apt purge exim4-* nfs-common triggerhappy
 sudo apt --purge autoremove
-

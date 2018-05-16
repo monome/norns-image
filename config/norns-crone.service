@@ -1,0 +1,13 @@
+[Unit]
+After=norns-jack.service
+
+[Service]
+Type=simple
+User=we
+Group=we
+LimitRTPRIO=95
+LimitMEMLOCK=infinity
+ExecStart=/home/we/norns/build/ws-wrapper/ws-wrapper /usr/bin/sclang ws://*:5556
+
+[Install]
+WantedBy=norns.target

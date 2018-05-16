@@ -1,0 +1,9 @@
+[Unit]
+Description=norns
+Requires=multi-user.target
+Requires=norns-jack.service
+Requires=norns-crone.service
+Requires=norns-matron.service
+Requires=norns-maiden.service
+After=multi-user.target
+AllowIsolate=yes
