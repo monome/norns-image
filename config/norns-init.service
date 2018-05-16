@@ -26,8 +26,8 @@ ExecStart=/usr/bin/amixer set Master 100% on
 #ExecStart=/usr/sbin/i2cset -y 1 0x60 2 52     # unmute, set vol to 0.1db
 
 # clean up stale wifi status from shutdown
-ExecStart=echo stopped > /home/we/status.wifi
-ExecStart=chown we.we /home/we/status.wifi
+ExecStart=/bin/echo stopped > /home/we/status.wifi
+ExecStart=/bin/chown we.we /home/we/status.wifi
 
 [Install]
 WantedBy=norns.target
