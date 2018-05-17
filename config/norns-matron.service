@@ -1,5 +1,4 @@
 [Unit]
-After=norns-crone.service
 After=norns-init.service
 
 [Service]
