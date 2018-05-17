@@ -6,6 +6,7 @@ Type=simple
 User=we
 Group=we
 ExecStart=/home/we/norns/build/ws-wrapper/ws-wrapper /home/we/norns/build/matron/matron ws://*:5555
+KillMode=process
 
 [Install]
 WantedBy=norns.target
