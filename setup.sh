@@ -27,10 +27,15 @@ sudo systemctl disable dhcpcd.service
 sudo systemctl disable hostapd.service
 sudo systemctl disable dnsmasq.service
 
+# Plymouth
 sudo systemctl mask plymouth-read-write.service
 sudo systemctl mask plymouth-start.service
 sudo systemctl mask plymouth-quit.service
 sudo systemctl mask plymouth-quit-wait.service
+
+# Apt timers
+sudo systemctl mask apt-daily.timer
+sudo systemctl mask apt-daily-upgrade.timer
 
 # disable swap
 sudo apt purge dphys-swapfile
