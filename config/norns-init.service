@@ -1,0 +1,33 @@
+[Unit]
+Description=norns-init
+
+[Service]
+Type=oneshot
+
+# turn analog gain stages to unity
+# note this gain stage is only applicable to round 1 prototypes
+# this will throw an error on others.
+# Channel 0 0000 0000
+ExecStart=/usr/sbin/i2cset -y 1 0x28 0x00
+# Channel 1 0100 0000
+ExecStart=/usr/sbin/i2cset -y 1 0x28 0x40
+
+# input gain stage. the default is mute so we skip this. we let matron turn it on.
+# but the values below are sane defaults otherwise (unity gain)
+#ExecStart=/usr/sbin/i2cset -y 1 0x29 16
+#ExecStart=/usr/sbin/i2cset -y 1 0x29 80
+
+# unmute soundcard output
+ExecStart=/usr/bin/amixer set Master 255 on
+
+# enable headphone driver (let matron handle this)
+#ExecStart=/usr/sbin/i2cset -y 1 0x60 1 192    # enable HP outputs
+#ExecStart=/usr/sbin/i2cset -y 1 0x60 2 32     # unmute, set vol to -10db
+#ExecStart=/usr/sbin/i2cset -y 1 0x60 2 52     # unmute, set vol to 0.1db
+
+# clean up stale wifi status from shutdown
+ExecStart=/bin/echo stopped > /home/we/status.wifi
+ExecStart=/bin/chown we.we /home/we/status.wifi
+
+[Install]
+WantedBy=norns.target
