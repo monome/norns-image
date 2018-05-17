@@ -1,5 +1,5 @@
 [Unit]
-Description=init gpio
+Description=norns-init
 
 [Service]
 Type=oneshot
@@ -18,7 +18,7 @@ ExecStart=/usr/sbin/i2cset -y 1 0x28 0x40
 #ExecStart=/usr/sbin/i2cset -y 1 0x29 80
 
 # unmute soundcard output
-ExecStart=/usr/bin/amixer set Master 100% on
+ExecStart=/usr/bin/amixer set Master 255 on
 
 # enable headphone driver (let matron handle this)
 #ExecStart=/usr/sbin/i2cset -y 1 0x60 1 192    # enable HP outputs
