@@ -1,5 +1,5 @@
 # install needed packages
-sudo apt install hostapd
+sudo apt install hostapd usbmount
 
 # setup
 sudo cp config/cmdline.txt /boot/
@@ -11,6 +11,9 @@ sudo cp --remove-destination config/norns-maiden.service /etc/systemd/system/nor
 sudo cp --remove-destination config/norns-matron.service /etc/systemd/system/norns-matron.service
 sudo cp --remove-destination config/norns.target /etc/systemd/system/norns.target
 sudo systemctl enable norns.target
+
+# usbmount
+sudo cp --remove-destination config/systemd-udevd.service /lib/systemd/system/systemd-udevd.service
 
 # wifi hotspot
 sudo cp config/dnsmasq.conf /etc/dnsmasq.conf
