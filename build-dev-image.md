@@ -92,6 +92,7 @@ sudo apt update
 sudo apt install --no-install-recommends jackd2
 sudo apt install libmonome-dev libnanomsg-dev supercollider-language supercollider-server supercollider-dev liblua5.3-dev libudev-dev libevdev-dev liblo-dev libcairo2-dev liblua5.3-dev libavahi-compat-libdnssd-dev libasound2-dev dnsmasq hostapd
 sudo apt install sc3-plugins ladspalist
+sudo apt install usbmount
 ```
 
 (clone your norns git)
