@@ -6,9 +6,9 @@ CONFIG means /boot/config.txt
 
 ## SoC
 
-Raspberry Pi Compute Module 3 (CM3) 
+Raspberry Pi Compute Module 3 (CM3)
 
-quad core 1.2Ghz, 1GB RAM 
+quad core 1.2Ghz, 1GB RAM
 
 onboard 4GB eMMC (rather than a SD card on consumer RPi models)
 
@@ -159,7 +159,7 @@ The OLED is controlled via SPI (spi0 on the CM3) and a few GPIOs.
 - PIN: RESET = GPIO6
 - PIN: DC = GPIO5*
 
-*GPIO7 on older proto, some red-wired to 5. This change was made because the kernel complained about loading a dtoverlay with GPIO7 because it's allocated as CE1 in the dt-blob, even though modprobing works fine-- I thought I would resolve this issue.
+*GPIO7 on older proto, some red-wired to 5. This change was made because the kernel complained about loading a dtoverlay with GPIO7 because it's allocated as CE1 in the dt-blob, even though modprobing works fine-- I thought I would resolve this issue.*
 
 ### Keys and Encoders
 
@@ -178,4 +178,3 @@ It might be better to use the "encoder" driver as there have been some issues us
 - PIN: ENC2B = GPIO33
 - PIN: ENC3A = GPIO36
 - PIN: ENC3B = GPIO37
-
