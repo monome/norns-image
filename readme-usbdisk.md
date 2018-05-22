@@ -66,10 +66,6 @@ a disk will show up in /dev/sd? (normally something like `/dev/sdb`).
 
 run `diskutil list` and note the name (norns is `3.9 GB` so that's a good clue).  the name will be something like `disk3`.
 
-### unmount
-
-#### mac os
-
 on mac os, it's important to unmount the disk before imaging (`diskutil unmountDisk /dev/disk<disk_name>`).  a successful command will look something like:
 
 ```shell
