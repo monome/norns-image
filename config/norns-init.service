@@ -29,5 +29,7 @@ ExecStart=/usr/bin/amixer set Master 255 on
 ExecStart=/bin/echo stopped > /home/we/status.wifi
 ExecStart=/bin/chown we.we /home/we/status.wifi
 
+ExecStart=/bin/sh -c "/bin/echo -n performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor"
+
 [Install]
 WantedBy=norns.target
