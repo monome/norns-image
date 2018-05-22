@@ -12,13 +12,13 @@ to open the cm3's emmc in usb disk mode:
 
 ## software
 
-https://www.raspberrypi.org/documentation/hardware/computemodule/cm-emmc-flashing.md
-
 ### preliminaries
 
 first you'll need to get `rpiboot` (or comparable) installed for your os.
 
 #### linux
+
+for debian-based distros,
 
 ```shell
 sudo apt-get install libusb-1.0-0-dev
@@ -26,6 +26,8 @@ git clone --depth=1 https://github.com/raspberrypi/usbboot
 cd usbboot
 make
 ```
+
+(for other linux distros, see the [rpi docs](https://www.raspberrypi.org/documentation/hardware/computemodule/cm-emmc-flashing.md).)
 
 #### mac os
 
