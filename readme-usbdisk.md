@@ -91,7 +91,7 @@ sync
 #### mac os
 
 ```shell
-sudo dd if=<my_img>.img of=/dev/r<disk_name> bs=4m conv=sparse`
+sudo dd if=<my_img>.img of=/dev/r<disk_name> bs=4m conv=sparse
 sync
 ```
 (note the `r` prefix — this is important.  it specifies the raw disk and your transfer will be _far slower_ without it; for details, see this [thread](https://apple.stackexchange.com/questions/270514/macos-sierra-dd-to-usb-is-very-slow-and-cant-seem-to-use-dev-rdisk).)
