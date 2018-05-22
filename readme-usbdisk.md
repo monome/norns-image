@@ -29,7 +29,12 @@ make
 
 #### mac os
 
-installing on mac os can be trickier.  instructions and background can be found in this [helpful article](http://www.uugear.com/portfolio/flashing-the-raspberry-pi-compute-module-emmc-under-mac-os/).
+```shell
+brew install libusb
+git clone --depth=1 https://github.com/raspberrypi/usbboot
+cd usbboot
+make
+```
 
 ### boot
 
