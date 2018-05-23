@@ -1,5 +1,5 @@
 # install needed packages
-sudo apt install hostapd
+sudo apt install hostapd midisport-firmware
 
 # setup
 sudo cp config/cmdline.txt /boot/
