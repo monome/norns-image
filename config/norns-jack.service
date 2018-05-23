@@ -9,7 +9,7 @@ Group=we
 Environment="JACK_NO_AUDIO_RESERVATION=1"
 LimitRTPRIO=95
 LimitMEMLOCK=infinity
-ExecStart=/usr/bin/jackd -R -P 75 -d alsa -d hw:0 -r 48000 -n 3 -p 128 -S
+ExecStart=/usr/bin/jackd -R -P 95 -d alsa -d hw:0 -r 48000 -n 3 -p 128 -S
 
 [Install]
 WantedBy=norns.target
