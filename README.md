@@ -9,28 +9,25 @@
 
 ## serial connection
 
-* linux: screen /dev/ttyACM0 115200
-* mac: screen /dev/tty.ubserial(...) 115200 (fill in the serial number)
+* linux: `screen /dev/ttyACM0 115200`
+* mac: `screen /dev/tty.ubserial(...) 115200` (fill in the serial number)
 * windows: install [Putty](https://www.putty.org/) and connect with connection type "Serial" to serial line COM(...) and speed: 115200 (fill in comport number)
 
-login is `pi` and password is `nnnn`
+login is `we` and password is `sleep`
 
 disconnect from `screen` (crtl-a-z) 
 
 ## hotspot connect
 
-norns boots by default in hotspot mode.  Connect to norns' wifi hotspot:
-SSID=norns
-PSK=nnnnnnnn
+norns boots by default in hotspot mode.  Connect to norns' wifi hotspot: SSID=norns PSK=nnnnnnnn
 
-`ssh pi@nnnn.local` (provided avahi is working)
-`ssh pi@172.24.1.1` (if avahi is not working)
+`ssh we@nnnn.local` (provided avahi is working) `ssh we@172.24.1.1` (if avahi is not working)
 
 ## switch norns wifi connection to external wifi network
-wifi.sh scan
-wifi.sh select "My Wifi SSID" "wifi-password"
-wifi-router.sh (helper script to reconfigure network whilst ssh-ed in)
-( wifi-hotspot.sh switches back to hotspot mode whilst ssh-ed in)
+* `wifi.sh scan`
+* `wifi.sh select "My Wifi SSID" "wifi-password"`
+* `wifi-router.sh` (helper script to reconfigure network whilst ssh-ed in)
+* `wifi-hotspot.sh` (switches back to hotspot mode whilst ssh-ed in)
 
 ## use
 
