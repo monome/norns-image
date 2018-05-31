@@ -1,4 +1,6 @@
-# norns
+# norns-image
+
+this repository contains files for building the norns disk image.
 
 ## start
 
@@ -15,33 +17,17 @@
 
 login is `we` and password is `sleep`
 
-disconnect from `screen` (crtl-a-z) 
+disconnect from `screen` (crtl-a-z)
 
 ## hotspot connect
 
-norns boots by default in hotspot mode.  Connect to norns' wifi hotspot: SSID=norns PSK=nnnnnnnn
+connect to norns' wifi hotspot: SSID=norns PSK=nnnnnnnn
 
-`ssh we@nnnn.local` (provided avahi is working) `ssh we@172.24.1.1` (if avahi is not working)
+`ssh we@norns.local` (provided avahi is working) `ssh we@172.24.1.1` (if avahi is not working)
 
 ## switch norns wifi connection to external wifi network
+* (`wifi.sh` is in the norns repo)
 * `wifi.sh scan`
 * `wifi.sh select "My Wifi SSID" "wifi-password"`
 * `wifi-router.sh` (helper script to reconfigure network whilst ssh-ed in)
 * `wifi-hotspot.sh` (switches back to hotspot mode whilst ssh-ed in)
-
-## use
-
-audio i/o test script:
-
-* `rec-test.sh` is a simple arecord input test
-
-you'll want to set up your git environment and then clone the norns repo.  
-
-then:
-
-```
-cd norns
-./crone.sh > /dev/null &
-./matron.sh > /dev/null &
-maiden/maiden
-```

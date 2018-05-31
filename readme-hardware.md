@@ -14,7 +14,7 @@ onboard 4GB eMMC (rather than a SD card on consumer RPi models)
 
 ### USB Disk access
 
-internal usb-mini port for accessing the CM3 as a usb disk. there is a power-always-on switch for using this mode which allows powering without the soft-on mechanism (which the CM3 itself controls)
+there is a switch accessible from the bottom of the board through a cutout. switch to DISK from RUN in order to execute the CM3 disk mode. see readme-usbdisk.md for further info.
 
 ## Power
 
@@ -24,7 +24,7 @@ The provided USB power supply provides 5.25V which accounts for some voltage dro
 
 ### Battery
 
-2000mAh lipo battery internally, with charge and monitoring circuitry.
+2250mAh lipo battery internally, with charge and monitoring circuitry.
 
 - DRIVER: BQ27441-G1 (battery monitor)
 - CONFIG: dtoverlay=bq27441
@@ -109,21 +109,13 @@ The codec is externally clocked with a crystal (for no jitter), and the sample r
 
 ### Inputs
 
-The audio inputs (stereo) have an analog gain stage, controlled by a digital potentiometer: DS1881. It's controlled via i2c. A driver could be created, but it's easy enough to use the i2c system as the protocol is very minimal.
-
-The i2c lines are connected to i2c0.
-
-CONFIG: dtparam=i2c_arm=on
-
-(TODO: protocol, which is in the datasheet)
-
 The input jacks are configured for balanced or unbalanced. Input impedance is 10k.
 
 ### Outputs
 
 The output jacks are configured for balanced or unbalanced. Output impedance is 590 ohm.
 
-Output from the codec is buffered and connected to the headphone driver as well.
+Output from the codec is connected to the headphone driver as well.
 
 ### Headphone driver
 
@@ -157,15 +149,13 @@ The OLED is controlled via SPI (spi0 on the CM3) and a few GPIOs.
 - PIN: SPI SCK = GPIO11
 - PIN: SPI CE0 = GPIO8
 - PIN: RESET = GPIO6
-- PIN: DC = GPIO5*
+- PIN: DC = GPIO5
 
-*GPIO7 on older proto, some red-wired to 5. This change was made because the kernel complained about loading a dtoverlay with GPIO7 because it's allocated as CE1 in the dt-blob, even though modprobing works fine-- I thought I would resolve this issue.*
 
 ### Keys and Encoders
 
-These don't require a driver presently but are exposed via sysfs (see `scripts/init-norns.sh`).
+There is a dt-overlay managing the keys and encoders.
 
-It might be better to use the "encoder" driver as there have been some issues using epoll to keep track of encoder ticks. The keys seem to work fine with epoll (given timing isn't an issue as they are all independent, whereas the encoder has two channels per knob).
 
 #### Pinout
 
