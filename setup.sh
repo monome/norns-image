@@ -8,6 +8,7 @@ sudo cp --remove-destination config/norns-crone.service /etc/systemd/system/norn
 sudo cp --remove-destination config/norns-init.service /etc/systemd/system/norns-init.service
 sudo cp --remove-destination config/norns-jack.service /etc/systemd/system/norns-jack.service
 sudo cp --remove-destination config/norns-maiden.service /etc/systemd/system/norns-maiden.service
+sudo cp --remove-destination config/norns-maiden.socket /etc/systemd/system/norns-maiden.socket
 sudo cp --remove-destination config/norns-matron.service /etc/systemd/system/norns-matron.service
 sudo cp --remove-destination config/norns.target /etc/systemd/system/norns.target
 sudo systemctl enable norns.target

@@ -1,4 +1,5 @@
 [Unit]
+Requires=norns-maiden.socket
 After=norns-matron.service
 
 [Service]
@@ -6,7 +7,7 @@ Type=simple
 User=we
 Group=we
 WorkingDirectory=/home/we/maiden
-ExecStart=/home/we/maiden/maiden.arm -app ./app/build -data /home/we/dust -doc /home/we/norns/doc
+ExecStart=/home/we/maiden/maiden.arm -fd 3 -app ./app/build -data /home/we/dust -doc /home/we/norns/doc
 
 [Install]
 WantedBy=norns.target
