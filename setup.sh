@@ -2,8 +2,6 @@
 sudo apt install hostapd midisport-firmware
 
 # setup
-sudo cp config/cmdline.txt /boot/
-
 sudo cp --remove-destination config/norns-crone.service /etc/systemd/system/norns-crone.service
 sudo cp --remove-destination config/norns-init.service /etc/systemd/system/norns-init.service
 sudo cp --remove-destination config/norns-jack.service /etc/systemd/system/norns-jack.service
