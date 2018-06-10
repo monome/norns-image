@@ -5,7 +5,7 @@ After=norns-init.service
 Type=simple
 User=we
 Group=we
-ExecStart=/home/we/norns/build/ws-wrapper/ws-wrapper /home/we/norns/build/matron/matron ws://*:5555
+ExecStart=/home/we/norns/build/ws-wrapper/ws-wrapper ws://*:5555 /home/we/norns/build/matron/matron
 KillMode=process
 
 [Install]
