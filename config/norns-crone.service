@@ -7,7 +7,7 @@ User=we
 Group=we
 LimitRTPRIO=95
 LimitMEMLOCK=infinity
-ExecStart=/home/we/norns/build/ws-wrapper/ws-wrapper /usr/bin/sclang ws://*:5556
+ExecStart=/home/we/norns/build/ws-wrapper/ws-wrapper ws://*:5556 /usr/bin/sclang -i maiden
 
 [Install]
 WantedBy=norns.target
