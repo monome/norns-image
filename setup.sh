@@ -1,7 +1,7 @@
 # install needed packages
 sudo apt install hostapd midisport-firmware
 
-# setup
+# systemd
 sudo cp --remove-destination config/norns-crone.service /etc/systemd/system/norns-crone.service
 sudo cp --remove-destination config/norns-init.service /etc/systemd/system/norns-init.service
 sudo cp --remove-destination config/norns-jack.service /etc/systemd/system/norns-jack.service
@@ -10,6 +10,9 @@ sudo cp --remove-destination config/norns-maiden.socket /etc/systemd/system/norn
 sudo cp --remove-destination config/norns-matron.service /etc/systemd/system/norns-matron.service
 sudo cp --remove-destination config/norns.target /etc/systemd/system/norns.target
 sudo systemctl enable norns.target
+
+# motd
+sudo cp config/motd /etc/motd
 
 # wifi hotspot
 sudo cp config/dnsmasq.conf /etc/dnsmasq.conf
