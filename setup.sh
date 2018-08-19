@@ -1,3 +1,6 @@
+# hold packages we don't want to update
+echo "raspberrypi-kernel hold" | sudo dpkg --set-selections
+
 # install needed packages
 sudo apt install hostapd midisport-firmware
 
