@@ -1,3 +1,6 @@
+# monome package apt
+sudo cp config/norns.list /etc/apt/sources.list.d/
+
 # install needed packages
 sudo apt install hostapd midisport-firmware
 
