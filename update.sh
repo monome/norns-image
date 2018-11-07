@@ -46,6 +46,8 @@ tar xzvf $local_update.norns
 check=$(md5sum -c *.md5 | grep "OK")
 if [ -z "$check" ]; then
   echo ">>>> MD5 FAILED. BAD UPDATE FILE."
+  echo "> REMOVING UPDATES"
+  rm -rf /home/we/update/*
   exit
 fi
 
