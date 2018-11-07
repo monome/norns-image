@@ -5,7 +5,7 @@ required_disk_free=200000
 disk_free=$(df -l | grep '/dev/root' | awk '{print $4}')
 echo "FREE DISK SPACE: $disk_free M"
 if [ "$disk_free" -lt "$required_disk_free" ]; then
-  echo "error > NOT ENOUGH FREE DISK SPACE"
+  echo "error > NOT ENOUGH FREE DISK SPACE (200M REQUIRED)"
   exit
 fi
 
@@ -35,6 +35,7 @@ if [ "$version" -gt "$local_update" ]; then
   echo "error > OLD UPDATE, NOT APPLYING"
   echo "> REMOVING UPDATES"
   rm -rf /home/we/update/*
+  exit
 fi
 
 # EXTRACT UPDATE
@@ -45,7 +46,7 @@ tar xzvf $local_update.norns
 # CHECK MD5
 check=$(md5sum -c *.md5 | grep "OK")
 if [ -z "$check" ]; then
-  echo ">>>> MD5 FAILED. BAD UPDATE FILE."
+  echo "error > MD5 FAILED. BAD UPDATE FILE."
   echo "> REMOVING UPDATES"
   rm -rf /home/we/update/*
   exit
