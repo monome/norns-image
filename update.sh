@@ -65,7 +65,7 @@ echo "UPDATE COMPLETE"
 echo "> REMOVING UPDATES"
 rm -rf /home/we/update/*
 
-# REBOOT
+# REBOOT (after updating update.sh)
 read -p "PRESS ENTER TO SHUTDOWN"
 echo "SHUTTING DOWN"
-sudo shutdown now
+sudo cp /home/we/norns-image/update.sh /home/we/ ; sudo shutdown now
