@@ -25,7 +25,7 @@ if [ ! -f "$disk_mount" ]; then
 fi
 
 # CHECK FOR LOCAL UPDATE FILES
-local_update=$(ls /home/we/update | grep norns | sed 's/.norns//' | sort -r | head -1)
+local_update=$(ls /home/we/update | grep '\.norns$' | sed 's/.norns//' | sort -r | head -1)
 echo "LOCAL UPDATE VERSION: $local_update"
 if [ -z "$local_update" ]; then
   echo "error > NO UPDATES"
