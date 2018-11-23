@@ -17,7 +17,7 @@ echo "CURRENT VERSION: $version"
 disk_mount=$(lsblk -o mountpoint | grep media)
 if [ ! -f "$disk_mount" ]; then
   echo "USB DISK PRESENT"
-  from_disk=$(ls $disk_mount | grep norns | sed 's/.norns//' | sort -r | head -1)
+  from_disk=$(ls $disk_mount | grep '\.norns$' | sed 's/.norns//' | sort -r | head -1)
   if [ "$from_disk" -gt "$version" ]; then
     echo "> COPYING FROM USB DISK"
     sudo cp -v $disk_mount/$from_disk.norns /home/we/update/
