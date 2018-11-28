@@ -21,9 +21,7 @@ sudo systemctl enable norns.target
 sudo cp config/motd /etc/motd
 
 # wifi hotspot
-sudo cp config/dnsmasq.conf /etc/dnsmasq.conf
 sudo cp config/interfaces /etc/network/interfaces
-sudo systemctl disable dnsmasq.service
 
 # Plymouth
 sudo systemctl mask plymouth-read-write.service
