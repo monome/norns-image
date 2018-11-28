@@ -5,7 +5,7 @@ sudo cp config/norns.list /etc/apt/sources.list.d/
 echo "raspberrypi-kernel hold" | sudo dpkg --set-selections
 
 # install needed packages
-sudo apt install hostapd midisport-firmware
+sudo apt install midisport-firmware
 
 # systemd
 sudo cp --remove-destination config/norns-crone.service /etc/systemd/system/norns-crone.service
@@ -22,12 +22,9 @@ sudo cp config/motd /etc/motd
 
 # wifi hotspot
 sudo cp config/dnsmasq.conf /etc/dnsmasq.conf
-sudo cp config/hostapd /etc/default/hostapd
-sudo cp config/hostapd.conf /etc/hostapd/hostapd.conf
 sudo cp config/dhcpcd.conf /etc/dhcpcd.conf
 sudo cp config/interfaces /etc/network/interfaces
 sudo systemctl disable dhcpcd.service
-sudo systemctl disable hostapd.service
 sudo systemctl disable dnsmasq.service
 
 # Plymouth
