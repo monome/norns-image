@@ -22,9 +22,7 @@ sudo cp config/motd /etc/motd
 
 # wifi hotspot
 sudo cp config/dnsmasq.conf /etc/dnsmasq.conf
-sudo cp config/dhcpcd.conf /etc/dhcpcd.conf
 sudo cp config/interfaces /etc/network/interfaces
-sudo systemctl disable dhcpcd.service
 sudo systemctl disable dnsmasq.service
 
 # Plymouth
