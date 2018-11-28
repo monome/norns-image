@@ -12,7 +12,7 @@ mac-address=00:13:EF:F1:17:06
 mac-address-blacklist=
 mode=ap
 seen-bssids=00:13:EF:F1:17:06;
-ssid=norns-manual
+ssid=norns
 
 [wifi-security]
 group=ccmp;
