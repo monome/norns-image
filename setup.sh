@@ -20,8 +20,11 @@ sudo systemctl enable norns.target
 # motd
 sudo cp config/motd /etc/motd
 
-# wifi hotspot
+# wifi
 sudo cp config/interfaces /etc/network/interfaces
+sudo cp config/network-manager/HOTSPOT /etc/NetworkManager/system-connections/
+sudo cp config/network-manager/100-disable-wifi-mac-randomization.conf /etc/NetworkManager/conf.d/
+sudo cp config/network-manager/200-disable-nmcli-auth.conf /etc/NetworkManager/conf.d/
 
 # Plymouth
 sudo systemctl mask plymouth-read-write.service
