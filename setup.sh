@@ -9,6 +9,8 @@ sudo apt install hostapd midisport-firmware
 
 # systemd
 sudo cp --remove-destination config/norns-crone.service /etc/systemd/system/norns-crone.service
+sudo cp --remove-destination config/norns-supernova.service /etc/systemd/system/norns-supernova.service
+sudo cp --remove-destination config/norns-sclang.service /etc/systemd/system/norns-sclang.service
 sudo cp --remove-destination config/norns-init.service /etc/systemd/system/norns-init.service
 sudo cp --remove-destination config/norns-jack.service /etc/systemd/system/norns-jack.service
 sudo cp --remove-destination config/norns-maiden.service /etc/systemd/system/norns-maiden.service
