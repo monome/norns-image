@@ -7,6 +7,9 @@ sudo cp config/norns.list /etc/apt/sources.list.d/
 # hold packages we don't want to update
 echo "raspberrypi-kernel hold" | sudo dpkg --set-selections
 
+# uninstall old network packages
+sudo apt-get purge dhcpcd5 isc-dhcp-client isc-dhcp-common hostapd dnsmasq dnsmasq-base
+
 # install needed packages
 sudo apt install network-manager dnsmasq-base midisport-firmware
 
