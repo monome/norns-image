@@ -5,7 +5,7 @@ sudo cp config/norns.list /etc/apt/sources.list.d/
 echo "raspberrypi-kernel hold" | sudo dpkg --set-selections
 
 # install needed packages
-sudo apt install hostapd midisport-firmware
+sudo apt install network-manager dnsmasq-base midisport-firmware
 
 # systemd
 sudo cp --remove-destination config/norns-crone.service /etc/systemd/system/norns-crone.service
@@ -17,20 +17,18 @@ sudo cp --remove-destination config/norns-maiden.service /etc/systemd/system/nor
 sudo cp --remove-destination config/norns-maiden.socket /etc/systemd/system/norns-maiden.socket
 sudo cp --remove-destination config/norns-matron.service /etc/systemd/system/norns-matron.service
 sudo cp --remove-destination config/norns.target /etc/systemd/system/norns.target
+sudo cp --remove-destination config/55-maiden-systemctl.pkla /etc/polkit-1/localauthority/50-local.d/55-maiden-systemctl.pkla
 sudo systemctl enable norns.target
 
 # motd
 sudo cp config/motd /etc/motd
 
-# wifi hotspot
-sudo cp config/dnsmasq.conf /etc/dnsmasq.conf
-sudo cp config/hostapd /etc/default/hostapd
-sudo cp config/hostapd.conf /etc/hostapd/hostapd.conf
-sudo cp config/dhcpcd.conf /etc/dhcpcd.conf
+# wifi
 sudo cp config/interfaces /etc/network/interfaces
-sudo systemctl disable dhcpcd.service
-sudo systemctl disable hostapd.service
-sudo systemctl disable dnsmasq.service
+sudo cp config/network-manager/HOTSPOT /etc/NetworkManager/system-connections/
+sudo cp config/network-manager/100-disable-wifi-mac-randomization.conf /etc/NetworkManager/conf.d/
+sudo cp config/network-manager/200-disable-nmcli-auth.conf /etc/NetworkManager/conf.d/
+sudo systemctl disable pppd-dns.service
 
 # Plymouth
 sudo systemctl mask plymouth-read-write.service
