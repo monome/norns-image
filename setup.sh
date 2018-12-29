@@ -29,6 +29,9 @@ sudo systemctl enable norns.target
 # motd
 sudo cp config/motd /etc/motd
 
+# bashrc
+sudo cp config/bashrc /home/we/.bashrc
+
 # wifi
 sudo cp config/interfaces /etc/network/interfaces
 sudo cp config/network-manager/HOTSPOT /etc/NetworkManager/system-connections/
