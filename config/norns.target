@@ -7,7 +7,6 @@ Requires=sound.target
 Requires=norns-init.service
 Requires=norns-jack.service
 Requires=norns-crone.service
-Requires=norns-supernova.service
 Requires=norns-sclang.service
 Requires=norns-matron.service
 Requires=norns-maiden.service

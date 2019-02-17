@@ -8,14 +8,14 @@ sudo cp config/norns.list /etc/apt/sources.list.d/
 echo "raspberrypi-kernel hold" | sudo dpkg --set-selections
 
 # uninstall old network packages
-sudo apt-get purge dhcpcd5 isc-dhcp-client isc-dhcp-common hostapd dnsmasq dnsmasq-base
+sudo apt-get purge -y hostapd
 
 # install needed packages
-sudo apt install network-manager dnsmasq-base midisport-firmware
+#sudo apt install network-manager dnsmasq-base midisport-firmware
 
 # systemd
 sudo cp --remove-destination config/norns-crone.service /etc/systemd/system/norns-crone.service
-sudo cp --remove-destination config/norns-supernova.service /etc/systemd/system/norns-supernova.service
+#sudo cp --remove-destination config/norns-supernova.service /etc/systemd/system/norns-supernova.service
 sudo cp --remove-destination config/norns-sclang.service /etc/systemd/system/norns-sclang.service
 sudo cp --remove-destination config/norns-init.service /etc/systemd/system/norns-init.service
 sudo cp --remove-destination config/norns-jack.service /etc/systemd/system/norns-jack.service
@@ -28,6 +28,9 @@ sudo systemctl enable norns.target
 
 # motd
 sudo cp config/motd /etc/motd
+
+# bashrc
+sudo cp config/bashrc /home/we/.bashrc
 
 # wifi
 sudo cp config/interfaces /etc/network/interfaces
@@ -57,4 +60,4 @@ sudo rm /var/swap
 
 # speed up boot
 sudo apt purge exim4-* nfs-common triggerhappy
-sudo apt --purge autoremove
+sudo apt --purge -y autoremove
