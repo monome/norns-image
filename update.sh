@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/bin/bash
 
 # CHECK DISK FREE SPACE
 required_disk_free=200000
