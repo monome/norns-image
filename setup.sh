@@ -40,7 +40,7 @@ sudo cp config/network-manager/200-disable-nmcli-auth.conf /etc/NetworkManager/c
 sudo systemctl disable pppd-dns.service
 
 # limit log sizes
-sudo cp config/journald.conf /dev/systemd/
+sudo cp config/journald.conf /etc/systemd/
 
 # Plymouth
 sudo systemctl mask plymouth-read-write.service
