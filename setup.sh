@@ -39,6 +39,9 @@ sudo cp config/network-manager/100-disable-wifi-mac-randomization.conf /etc/Netw
 sudo cp config/network-manager/200-disable-nmcli-auth.conf /etc/NetworkManager/conf.d/
 sudo systemctl disable pppd-dns.service
 
+# limit log sizes
+sudo cp config/journald.conf /dev/systemd/
+
 # Plymouth
 sudo systemctl mask plymouth-read-write.service
 sudo systemctl mask plymouth-start.service
