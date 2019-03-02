@@ -41,6 +41,9 @@ sudo systemctl disable pppd-dns.service
 
 # limit log sizes
 sudo cp config/journald.conf /etc/systemd/
+sudo cp config/logrotate.conf /etc/
+sudo cp config/rsyslogd.conf /etc/
+sydo cp config/rsyslog /etc/rsyslog.d/
 
 # Plymouth
 sudo systemctl mask plymouth-read-write.service
