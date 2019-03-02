@@ -1,5 +1,5 @@
 [Unit]
-After=norns-supernova.service
+Wants=norns-jack.service
 
 [Service]
 Type=simple
