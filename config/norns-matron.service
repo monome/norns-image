@@ -1,5 +1,4 @@
 [Unit]
-After=norns-init.service
 
 [Service]
 Type=simple

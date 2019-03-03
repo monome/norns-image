@@ -15,6 +15,7 @@ sudo apt-get purge -y hostapd
 
 # systemd
 sudo cp --remove-destination config/norns-crone.service /etc/systemd/system/norns-crone.service
+sudo rm /etc/systemd/system/norns-supernova.service
 #sudo cp --remove-destination config/norns-supernova.service /etc/systemd/system/norns-supernova.service
 sudo cp --remove-destination config/norns-sclang.service /etc/systemd/system/norns-sclang.service
 sudo cp --remove-destination config/norns-init.service /etc/systemd/system/norns-init.service
@@ -41,6 +42,9 @@ sudo systemctl disable pppd-dns.service
 
 # limit log sizes
 sudo cp config/journald.conf /etc/systemd/
+sudo cp config/logrotate.conf /etc/
+sudo cp config/rsyslog.conf /etc/
+sydo cp config/rsyslog /etc/rsyslog.d/
 
 # Plymouth
 sudo systemctl mask plymouth-read-write.service

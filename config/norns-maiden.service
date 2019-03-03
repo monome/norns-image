@@ -1,6 +1,5 @@
 [Unit]
 Requires=norns-maiden.socket
-After=norns-matron.service
 
 [Service]
 Type=simple

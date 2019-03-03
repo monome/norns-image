@@ -1,6 +1,5 @@
 [Unit]
 After=sound.target
-After=norns-init.target
 
 [Service]
 Type=simple
