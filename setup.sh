@@ -14,6 +14,8 @@ sudo apt-get purge -y hostapd
 #sudo apt install network-manager dnsmasq-base midisport-firmware
 
 # systemd
+sudo mkdir -p /etc/systemd/system.conf.d
+sudo cp --remove-destination config/10-default-env-vars.conf /etc/systemd/system.conf.d/10-default-env-vars.conf
 sudo cp --remove-destination config/norns-crone.service /etc/systemd/system/norns-crone.service
 #sudo cp --remove-destination config/norns-supernova.service /etc/systemd/system/norns-supernova.service
 sudo cp --remove-destination config/norns-sclang.service /etc/systemd/system/norns-sclang.service
@@ -28,6 +30,9 @@ sudo systemctl enable norns.target
 
 # motd
 sudo cp config/motd /etc/motd
+
+# profile
+sudo cp config/10-default-env-vars.sh /etc/profile.d/10-default-env-vars.sh
 
 # bashrc
 sudo cp config/bashrc /home/we/.bashrc
