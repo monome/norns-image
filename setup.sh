@@ -49,7 +49,7 @@ sudo systemctl disable pppd-dns.service
 sudo cp config/journald.conf /etc/systemd/
 sudo cp config/logrotate.conf /etc/
 sudo cp config/rsyslog.conf /etc/
-sydo cp config/rsyslog /etc/rsyslog.d/
+sudo cp config/rsyslog /etc/rsyslog.d/
 
 # Plymouth
 sudo systemctl mask plymouth-read-write.service
