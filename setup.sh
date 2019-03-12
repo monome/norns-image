@@ -52,3 +52,9 @@ sudo rm /var/swap
 # speed up boot
 sudo apt purge exim4-* nfs-common triggerhappy
 sudo apt --purge autoremove
+
+
+# ensure we don't override kernel option for 'ondemand' frequency
+# governor
+sudo systemctl disable loadcpufreq.service
+sudo systemctl disable raspi-config.service
