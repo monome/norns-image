@@ -56,5 +56,4 @@ sudo apt --purge autoremove
 
 # ensure we don't override kernel option for 'ondemand' frequency
 # governor
-sudo systemctl disable loadcpufreq.service
-sudo systemctl disable raspi-config.service
+sudo systemctl mask raspi-config.service
