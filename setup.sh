@@ -1,34 +1,55 @@
+# update script
+sudo cp update.sh /home/we/
+
 # monome package apt
 sudo cp config/norns.list /etc/apt/sources.list.d/
 
 # hold packages we don't want to update
 echo "raspberrypi-kernel hold" | sudo dpkg --set-selections
 
+# uninstall old network packages
+sudo apt-get purge -y hostapd
+
 # install needed packages
-sudo apt install hostapd midisport-firmware
+#sudo apt install network-manager dnsmasq-base midisport-firmware
 
 # systemd
+sudo mkdir -p /etc/systemd/system.conf.d
+sudo cp --remove-destination config/10-default-env-vars.conf /etc/systemd/system.conf.d/10-default-env-vars.conf
 sudo cp --remove-destination config/norns-crone.service /etc/systemd/system/norns-crone.service
+sudo rm /etc/systemd/system/norns-supernova.service
+#sudo cp --remove-destination config/norns-supernova.service /etc/systemd/system/norns-supernova.service
+sudo cp --remove-destination config/norns-sclang.service /etc/systemd/system/norns-sclang.service
 sudo cp --remove-destination config/norns-init.service /etc/systemd/system/norns-init.service
 sudo cp --remove-destination config/norns-jack.service /etc/systemd/system/norns-jack.service
 sudo cp --remove-destination config/norns-maiden.service /etc/systemd/system/norns-maiden.service
 sudo cp --remove-destination config/norns-maiden.socket /etc/systemd/system/norns-maiden.socket
 sudo cp --remove-destination config/norns-matron.service /etc/systemd/system/norns-matron.service
 sudo cp --remove-destination config/norns.target /etc/systemd/system/norns.target
+sudo cp --remove-destination config/55-maiden-systemctl.pkla /etc/polkit-1/localauthority/50-local.d/55-maiden-systemctl.pkla
 sudo systemctl enable norns.target
 
 # motd
 sudo cp config/motd /etc/motd
 
-# wifi hotspot
-sudo cp config/dnsmasq.conf /etc/dnsmasq.conf
-sudo cp config/hostapd /etc/default/hostapd
-sudo cp config/hostapd.conf /etc/hostapd/hostapd.conf
-sudo cp config/dhcpcd.conf /etc/dhcpcd.conf
+# profile
+sudo cp config/10-default-env-vars.sh /etc/profile.d/10-default-env-vars.sh
+
+# bashrc
+sudo cp config/bashrc /home/we/.bashrc
+
+# wifi
 sudo cp config/interfaces /etc/network/interfaces
-sudo systemctl disable dhcpcd.service
-sudo systemctl disable hostapd.service
-sudo systemctl disable dnsmasq.service
+sudo cp config/network-manager/HOTSPOT /etc/NetworkManager/system-connections/
+sudo cp config/network-manager/100-disable-wifi-mac-randomization.conf /etc/NetworkManager/conf.d/
+sudo cp config/network-manager/200-disable-nmcli-auth.conf /etc/NetworkManager/conf.d/
+sudo systemctl disable pppd-dns.service
+
+# limit log sizes
+sudo cp config/journald.conf /etc/systemd/
+sudo cp config/logrotate.conf /etc/
+sudo cp config/rsyslog.conf /etc/
+sudo cp config/rsyslog /etc/rsyslog.d/
 
 # Plymouth
 sudo systemctl mask plymouth-read-write.service
@@ -51,9 +72,9 @@ sudo rm /var/swap
 
 # speed up boot
 sudo apt purge exim4-* nfs-common triggerhappy
-sudo apt --purge autoremove
-
 
 # ensure we don't override kernel option for 'ondemand' frequency
 # governor
 sudo systemctl mask raspi-config.service
+
+sudo apt --purge -y autoremove

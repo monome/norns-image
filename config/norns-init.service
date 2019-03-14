@@ -8,9 +8,9 @@ Type=oneshot
 # note this gain stage is only applicable to round 1 prototypes
 # this will throw an error on others.
 # Channel 0 0000 0000
-ExecStart=-/usr/sbin/i2cset -y 1 0x28 0x00
+#ExecStart=-/usr/sbin/i2cset -y 1 0x28 0x00
 # Channel 1 0100 0000
-ExecStart=-/usr/sbin/i2cset -y 1 0x28 0x40
+#ExecStart=-/usr/sbin/i2cset -y 1 0x28 0x40
 
 # input gain stage. the default is mute so we skip this. we let matron turn it on.
 # but the values below are sane defaults otherwise (unity gain)
@@ -26,8 +26,8 @@ ExecStart=/usr/bin/amixer set Master 255 on
 #ExecStart=/usr/sbin/i2cset -y 1 0x60 2 52     # unmute, set vol to 0.1db
 
 # clean up stale wifi status from shutdown
-ExecStart=/bin/echo stopped > /home/we/status.wifi
-ExecStart=/bin/chown we.we /home/we/status.wifi
+#ExecStart=/bin/echo stopped > /home/we/status.wifi
+#ExecStart=/bin/chown we.we /home/we/status.wifi
 
 ExecStart=/bin/sh -c "/bin/echo -n performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor"
 
