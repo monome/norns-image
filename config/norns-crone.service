@@ -8,7 +8,6 @@ User=we
 Group=we
 LimitRTPRIO=95
 LimitMEMLOCK=infinity
-ExecStartPre=/usr/bin/jack_wait -w -t 10
 ExecStart=/home/we/norns/build/crone/crone
 
 [Install]
