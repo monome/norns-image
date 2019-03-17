@@ -56,10 +56,12 @@ sudo cp config/rsyslog.conf /etc/
 sudo cp config/rsyslog /etc/rsyslog.d/
 
 # Plymouth
-sudo systemctl mask plymouth-read-write.service
-sudo systemctl mask plymouth-start.service
-sudo systemctl mask plymouth-quit.service
-sudo systemctl mask plymouth-quit-wait.service
+# Get rid of our old masked plymouth units
+sudo systemctl unmask plymouth-read-write.service
+sudo systemctl unmask plymouth-start.service
+sudo systemctl unmask plymouth-quit.service
+sudo systemctl unmask plymouth-quit-wait.service
+sudo apt-get purge -y plymouth
 
 # Apt timers
 sudo systemctl mask apt-daily.timer
