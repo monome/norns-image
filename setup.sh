@@ -20,7 +20,6 @@ sudo cp --remove-destination config/norns-crone.service /etc/systemd/system/norn
 sudo rm /etc/systemd/system/norns-supernova.service
 #sudo cp --remove-destination config/norns-supernova.service /etc/systemd/system/norns-supernova.service
 sudo cp --remove-destination config/norns-sclang.service /etc/systemd/system/norns-sclang.service
-sudo cp --remove-destination config/norns-init.service /etc/systemd/system/norns-init.service
 sudo cp --remove-destination config/norns-jack.service /etc/systemd/system/norns-jack.service
 sudo cp --remove-destination config/norns-maiden.service /etc/systemd/system/norns-maiden.service
 sudo cp --remove-destination config/norns-maiden.socket /etc/systemd/system/norns-maiden.socket
