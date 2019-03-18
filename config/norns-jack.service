@@ -9,7 +9,7 @@ Environment="JACK_NO_AUDIO_RESERVATION=1"
 LimitRTPRIO=95
 LimitMEMLOCK=infinity
 ExecStart=/usr/bin/jackd -R -P 95 -d alsa -d hw:0 -r 48000 -n 3 -p 128 -S -s
-ExecStartPost=/bin/sleep 2
+ExecStartPost=/usr/bin/jack_wait -w -t 10
 TimeoutStopSec=1
 
 [Install]
