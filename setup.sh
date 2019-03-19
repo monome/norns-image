@@ -37,7 +37,10 @@ sudo cp config/10-default-env-vars.sh /etc/profile.d/10-default-env-vars.sh
 # bashrc
 sudo cp config/bashrc /home/we/.bashrc
 
-# wifi
+# Wifi
+# Use the upstream rtl8192cu driver instead of the problematic realtek 8192cu driver
+sudo rm -f /etc/modprobe.d/blacklist-rtl8192cu.conf
+sudo cp config/blacklist-8192cu.conf /etc/modprobe.d/
 sudo cp config/interfaces /etc/network/interfaces
 sudo cp config/network-manager/HOTSPOT /etc/NetworkManager/system-connections/
 sudo cp config/network-manager/100-disable-wifi-mac-randomization.conf /etc/NetworkManager/conf.d/
