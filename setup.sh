@@ -41,9 +41,11 @@ sudo cp config/bashrc /home/we/.bashrc
 # Use the upstream rtl8192cu driver instead of the problematic realtek 8192cu driver
 sudo rm -f /etc/modprobe.d/blacklist-rtl8192cu.conf
 sudo cp config/blacklist-8192cu.conf /etc/modprobe.d/
+# NetworkManager config
 sudo cp config/interfaces /etc/network/interfaces
 sudo cp config/network-manager/HOTSPOT /etc/NetworkManager/system-connections/
 sudo cp config/network-manager/100-disable-wifi-mac-randomization.conf /etc/NetworkManager/conf.d/
+sudo cp config/network-manager/101-logging.conf /etc/NetworkManager/conf.d/
 sudo cp config/network-manager/200-disable-nmcli-auth.conf /etc/NetworkManager/conf.d/
 sudo systemctl disable pppd-dns.service
 
