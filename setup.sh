@@ -1,6 +1,3 @@
-# update script
-sudo cp update.sh /home/we/
-
 # monome package apt
 sudo cp config/norns.list /etc/apt/sources.list.d/
 
