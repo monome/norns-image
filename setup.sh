@@ -4,6 +4,21 @@ sudo cp config/norns.list /etc/apt/sources.list.d/
 # hold packages we don't want to update
 echo "raspberrypi-kernel hold" | sudo dpkg --set-selections
 
+# uninstall packages we don't need
+sudo apt purge libraspberrypi-doc
+
+# install specific version of Raspberry firmware and userland tools
+RPI_FIRMWARE_VERSION="1.20190401-1"
+RPI_FIRMWARE_PACKAGES=( raspberrypi-bootloader libraspberrypi0 libraspberrypi-dev libraspberrypi-bin )
+
+for PACKAGE in "${RPI_FIRMWARE_PACKAGES[@]}"
+do
+  wget --quiet "https://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/${PACKAGE}_${RPI_FIRMWARE_VERSION}_armhf.deb"
+  sudo dpkg -i ${PACKAGE}_${RPI_FIRMWARE_VERSION}_armhf.deb
+  echo "${PACKAGE} hold" | sudo dpkg --set-selections
+  rm ${PACKAGE}_${RPI_FIRMWARE_VERSION}_armhf.deb
+done
+
 # uninstall old network packages
 sudo apt-get purge -y hostapd
 
