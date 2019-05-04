@@ -20,7 +20,7 @@ do
 done
 
 # uninstall old network packages
-sudo apt-get purge -y hostapd
+sudo apt purge hostapd
 
 # install needed packages
 #sudo apt install network-manager dnsmasq-base midisport-firmware
@@ -72,7 +72,7 @@ sudo systemctl unmask plymouth-read-write.service
 sudo systemctl unmask plymouth-start.service
 sudo systemctl unmask plymouth-quit.service
 sudo systemctl unmask plymouth-quit-wait.service
-sudo apt-get purge -y plymouth
+sudo apt purge plymouth
 
 # Apt timers
 sudo systemctl mask apt-daily.timer
