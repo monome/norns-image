@@ -8,11 +8,13 @@ Disassemble norns, connect both USB cables to linux computer (to internal and ex
 
 ### (Linux)
 
-* lite image: https://www.raspberrypi.org/downloads/raspbian/ (2017-11-29)
+* lite image: https://www.raspberrypi.org/downloads/raspbian/
 * usbboot: https://www.raspberrypi.org/documentation/hardware/computemodule/cm-emmc-flashing.md
-* copy image to norns emmc: `sudo dd if=2017-11-29-raspbian-stretch-lite.img of=/dev/sdb bs=4MiB conv=fsync'
+* copy image to norns emmc: `sudo dd if=2017-11-29-raspbian-stretch-lite.img of=/dev/sdb bs=4MiB conv=fsync status=progress'
 
 Disconnect the boot USB port. Reset the norns with the bottom switch. Insert wifi.
+
+Tape down the power button. (Because a file is not yet installed to keep the soft-power-switch on).
 
 * connect to norns serial port: `screen /dev/ttyUSB0 115200`
 
@@ -32,6 +34,8 @@ login is "pi" with password "raspberry"
 
 * check IP address (`ifconfig`)
 
+
+
 change user name: we
 
 1. `sudo passwd root`
@@ -43,30 +47,20 @@ change user name: we
 
 disable need for passwd with sudo
 
-1. sudo nano /etc/sudoers.d/010...
+1. sudo nano /etc/sudoers.d/010_pi-nopasswd
 2. change 'pi' to 'we'
 
 SSH to this IP with a new terminal from the linux computer (the terminal will work better).
 
 * `sudo apt-get update`
-* `sudo apt-get install vim git bc i2c-tools`
+* `sudo apt-get upgrade`
+* `sudo apt-get install vim emacs git bc i2c-tools`
 
-* get new kernel, compiled on the linux computer (see below) or from repo
-
-below using: kernel-4.9.59-rt52-0.0.4.tar.gz
-
-```
-wget https://monome.nyc3.digitaloceanspaces.com/kernel-4.9.59-rt52-0.0.4.tar.gz
-sudo tar -xvzf kernel-4.9.59-rt52-0.0.4.tar.gz -C /
-```
-
-config.txt is in the kernel zip
-
-get dt-blob.bin, copy to boot
+* get new kernel, put in home folder
 
 ```
-wget https://monome.nyc3.digitaloceanspaces.com/dt-blob.bin
-sudo mv dt-blob.bin /boot/
+cd /
+sudo tar -xvzf ~/kernel(...).tar.gz
 ```
 
 reboot
