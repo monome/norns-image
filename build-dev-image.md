@@ -75,7 +75,12 @@ cd norns-image
 ./setup.sh
 ```
 
-install norns TODO: remove most of this. just copy norns/maiden/dust release folders. installing supercollider is the main thing.
+install norns 
+
+- TODO: remove some of this below?
+- just copy norns/maiden/dust release folders.
+- installing supercollider is the main thing.
+- tons of recommends ie for libcairo2-dev
 
 ```
 curl https://keybase.io/artfwo/pgp_keys.asc | sudo apt-key add -
