@@ -103,7 +103,7 @@ cd sc
 ./install.sh
 ``` 
 
-note: you may need to run sclang once first (it will fail) before running sc/install.sh
+note: you may need to run sclang once first (it will fail) before running `norns/sc/install.sh`
 
 reboot, norns should boot up.
 
