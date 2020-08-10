@@ -69,6 +69,7 @@ clone norns-image for config setups
 
 (this really needs to be done via `screen` not `ssh` because installing `network-manager` kills the wifi connection)
 
+NOTE: `buster` branch of norns-image (to be commited to main)
 ```
 git clone https://github.com/tehn/norns-image.git 
 cd norns-image
@@ -87,9 +88,9 @@ curl https://keybase.io/artfwo/pgp_keys.asc | sudo apt-key add -
 echo "deb https://package.monome.org/ stretch main" | sudo tee /etc/apt/sources.list.d/norns.list
 sudo apt update
 sudo apt install --no-install-recommends jackd2 libjack-jackd2-dev
-sudo apt install libmonome-dev libnanomsg-dev supercollider-language supercollider-server supercollider-dev liblua5.3-dev libudev-dev libevdev-dev liblo-dev libcairo2-dev liblua5.3-dev libavahi-compat-libdnssd-dev libasound2-dev dnsmasq
-sudo apt install sc3-plugins ladspalist
-sudo apt install usbmount
+sudo apt install --no-install-recommends libmonome-dev libnanomsg-dev liblua5.3-dev libudev-dev libevdev-dev liblo-dev libcairo2-dev liblua5.3-dev libavahi-compat-libdnssd-dev libasound2-dev dnsmasq
+sudo apt install --no-install-recommends supercollider-language supercollider-server supercollider-dev sc3-plugins
+sudo apt install --no-install-recommends ladspalist usbmount
 ```
 
 (clone your norns git)
