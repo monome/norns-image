@@ -20,7 +20,7 @@ sudo apt purge libraspberrypi-doc
 #done
 
 # install needed packages
-sudo apt install network-manager dnsmasq-base midisport-firmware samba
+sudo apt install --no-install-recommends network-manager dnsmasq-base midisport-firmware samba
 sudo apt purge modemmanager
 
 # systemd
