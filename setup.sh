@@ -38,6 +38,9 @@ sudo cp --remove-destination config/norns.target /etc/systemd/system/norns.targe
 sudo cp --remove-destination config/55-maiden-systemctl.pkla /etc/polkit-1/localauthority/50-local.d/55-maiden-systemctl.pkla
 sudo systemctl enable norns.target
 
+# rc.local
+sudo cp config/rc.local /etc/
+
 # motd
 sudo cp config/motd /etc/motd
 
