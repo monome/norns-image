@@ -107,6 +107,8 @@ note: you may need to run sclang once first (it will fail) before running `norns
 
 reboot, norns should boot up.
 
+NOTE: `alsamixer` isn't turned up all the way. manually increase to 100
+
 
 set up `usbmount` for SYNC/etc via menu:
 
