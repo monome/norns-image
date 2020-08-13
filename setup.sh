@@ -58,8 +58,8 @@ sudo /etc/init.d/samba restart
 
 # Wifi
 # Use the upstream rtl8192cu driver instead of the problematic realtek 8192cu driver
-#???? sudo rm -f /etc/modprobe.d/blacklist-rtl8192cu.conf
-#???? sudo cp config/blacklist-8192cu.conf /etc/modprobe.d/
+sudo rm -f /etc/modprobe.d/blacklist-rtl8192cu.conf
+sudo cp config/blacklist-8192cu.conf /etc/modprobe.d/
 # NetworkManager config
 sudo cp config/interfaces /etc/network/interfaces
 sudo cp config/network-manager/100-disable-wifi-mac-randomization.conf /etc/NetworkManager/conf.d/
