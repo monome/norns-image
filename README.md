@@ -21,7 +21,7 @@ disconnect from `screen` (crtl-a-z)
 
 ## hotspot connect
 
-connect to norns' wifi hotspot: SSID=norns PSK=nnnnnnnn
+connect to norns' wifi hotspot: SSID=nnnnnnnn+ PSK=22222222
 
 `ssh we@norns.local` (provided avahi is working) `ssh we@172.24.1.1` (if avahi is not working)
 
