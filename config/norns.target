@@ -6,7 +6,7 @@ Requires=sound.target
 
 Requires=norns-jack.service
 Requires=norns-sclang.service
-Requires=norns-matron.service
+Requires=norns-main.service
 Requires=norns-maiden.service
 
 AllowIsolate=yes

@@ -36,7 +36,9 @@ sudo cp --remove-destination config/norns-sclang.service /etc/systemd/system/nor
 sudo cp --remove-destination config/norns-jack.service /etc/systemd/system/norns-jack.service
 sudo cp --remove-destination config/norns-maiden.service /etc/systemd/system/norns-maiden.service
 sudo cp --remove-destination config/norns-maiden.socket /etc/systemd/system/norns-maiden.socket
-sudo cp --remove-destination config/norns-matron.service /etc/systemd/system/norns-matron.service
+sudo rm /etc/systemd/system/norns-matron.service
+#sudo cp --remove-destination config/norns-matron.service /etc/systemd/system/norns-matron.service
+sudo cp --remove-destination config/norns-main.service /etc/systemd/system/norns-main.service
 sudo cp --remove-destination config/norns-watcher.service /etc/systemd/system/norns-watcher.service
 sudo cp --remove-destination config/norns.target /etc/systemd/system/norns.target
 sudo cp --remove-destination config/55-maiden-systemctl.pkla /etc/polkit-1/localauthority/50-local.d/55-maiden-systemctl.pkla

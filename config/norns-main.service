@@ -5,6 +5,8 @@ After=norns-jack.service
 Type=simple
 User=we
 Group=we
+LimitRTPRIO=95
+LimitMEMLOCK=infinity
 ExecStart=/home/we/norns/build/ws-wrapper/ws-wrapper ws://*:5555 /home/we/norns/build/norns/norns
 
 [Install]
