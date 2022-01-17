@@ -88,7 +88,7 @@ curl https://keybase.io/artfwo/pgp_keys.asc | sudo apt-key add -
 echo "deb https://package.monome.org/ stretch main" | sudo tee /etc/apt/sources.list.d/norns.list
 sudo apt update
 sudo apt install --no-install-recommends jackd2 libjack-jackd2-dev
-sudo apt install --no-install-recommends libmonome-dev libnanomsg-dev liblua5.3-dev libudev-dev libevdev-dev liblo-dev libcairo2-dev liblua5.3-dev libavahi-compat-libdnssd-dev libasound2-dev dnsmasq
+sudo apt install --no-install-recommends libmonome-dev libnanomsg-dev liblua5.3-dev libudev-dev libevdev-dev liblo-dev libcairo2-dev liblua5.3-dev libavahi-compat-libdnssd-dev libasound2-dev libboost-dev dnsmasq
 sudo apt install --no-install-recommends supercollider-language supercollider-server supercollider-dev sc3-plugins
 sudo apt install --no-install-recommends ladspalist usbmount
 ```
