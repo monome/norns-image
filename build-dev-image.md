@@ -32,23 +32,24 @@ re-login via `ssh pi@norns.local` (pw is now `sleep`)
 
 continuing on within the ssh session:
 
-run updates
-
-* `sudo apt-get update`
-* `sudo apt-get upgrade`
-* `sudo apt-get install vim git bc i2c-tools`
-
 update kernel
 
 * get new kernel, put in linux computer `TODO`: get directly from gh
 
 ```
-cd /
 sudo tar -xvzf ~/kernel(...).tar.gz
+sudo cp -R boot/* /boot/
+sudo cp -R lib/* /lib/
 sudo shutdown now
 ```
 
 you can now remove the tape/weight from your power switch
+
+run updates
+
+* `sudo apt-get update`
+* `sudo apt-get upgrade`
+* `sudo apt-get install vim git bc i2c-tools`
 
 change user name: we
 
@@ -61,8 +62,9 @@ change user name: we
 
 disable need for passwd with sudo
 
-1. sudo nano /etc/sudoers.d/010_pi-nopasswd
+1. sudo vim /etc/sudoers.d/010_pi-nopasswd
 2. change 'pi' to 'we'
+3. force write with :w!
 
 
 clone norns-image for config setups
