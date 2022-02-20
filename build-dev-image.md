@@ -78,22 +78,34 @@ cd norns-image
 ./setup.sh
 ```
 
-install norns 
-
-- TODO: remove some of this below?
-- just copy norns/maiden/dust release folders.
-- installing supercollider is the main thing.
-- tons of recommends ie for libcairo2-dev
-
+DEV
 ```
-curl https://keybase.io/artfwo/pgp_keys.asc | sudo apt-key add -
-echo "deb https://package.monome.org/ stretch main" | sudo tee /etc/apt/sources.list.d/norns.list
-sudo apt update
+sudo apt-get install libevdev-dev liblo-dev libudev-dev libcairo2-dev liblua5.3-dev libavahi-compat-libdnssd-dev libasound2-dev libncurses5-dev libncursesw5-dev libsndfile1-dev libjack-dev libboost-dev libnanomsg-dev
 sudo apt install --no-install-recommends jackd2 libjack-jackd2-dev
-sudo apt install --no-install-recommends libmonome-dev libnanomsg-dev liblua5.3-dev libudev-dev libevdev-dev liblo-dev libcairo2-dev liblua5.3-dev libavahi-compat-libdnssd-dev libasound2-dev libboost-dev dnsmasq
-sudo apt install --no-install-recommends supercollider-language supercollider-server supercollider-dev sc3-plugins
 sudo apt install --no-install-recommends ladspalist usbmount
 ```
+
+libmonome
+```
+git clone https://github.com/monome/libmonome.git
+./waf configure
+./waf
+sudo ./waf install
+```
+
+supercollider
+```
+sudo apt-get install libsamplerate0-dev libsndfile1-dev libasound2-dev libavahi-client-dev \
+    libreadline-dev libfftw3-dev libudev-dev libncurses5-dev cmake git
+git clone https://github.com/supercollider/supercollider.git
+```
+
+sc3-plugins
+
+
+install norns 
+
+- just copy norns/maiden/dust release folders.
 
 (clone your norns git)
 
@@ -108,15 +120,3 @@ cd sc
 note: you may need to run sclang once first (it will fail) before running `norns/sc/install.sh`
 
 reboot, norns should boot up.
-
-NOTE: `alsamixer` isn't turned up all the way. manually increase to 100
-
-
-set up `usbmount` for SYNC/etc via menu:
-
-   (1) the 'usbmount' package is installed
-       apt-get install usbmount
-
-   (2) MountFlags has been tweaked in systemd-udevd.service
-       https://www.raspberrypi.org/forums/viewtopic.php?t=205016
-       (change MountFlags=slave to MountFlags=shared)
