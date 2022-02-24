@@ -113,7 +113,7 @@ cmake     -DCMAKE_BUILD_TYPE=Release \
     -DSC_ED=0 \
     -DSC_EL=0 \
     -DSC_VIM=1 \
-    -DNO_X11=ON -DSC_QT=OFF
+    -DNO_X11=ON -DSC_QT=OFF ..
 ```
 
 sc3-plugins
