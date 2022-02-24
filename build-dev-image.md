@@ -98,6 +98,22 @@ supercollider
 sudo apt-get install libsamplerate0-dev libsndfile1-dev libasound2-dev libavahi-client-dev \
     libreadline-dev libfftw3-dev libudev-dev libncurses5-dev cmake git
 git clone https://github.com/supercollider/supercollider.git
+
+cmake     -DCMAKE_BUILD_TYPE=Release \
+    -DNATIVE=1 \
+    -DSSE=0 \
+    -DSSE2=0 \
+    -DENABLE_TESTSUITE=0 \
+    -DCMAKE_SKIP_RPATH=1 \
+    -DLIBSCSYNTH=0 \
+    -DSUPERNOVA=0 \
+    -DSC_WII=0 \
+    -DSC_IDE=0 \
+    -DSC_QT=0 \
+    -DSC_ED=0 \
+    -DSC_EL=0 \
+    -DSC_VIM=1 \
+    -DNO_X11=ON -DSC_QT=OFF
 ```
 
 sc3-plugins
