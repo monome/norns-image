@@ -53,7 +53,7 @@ run updates
 
 change user name: we
 
-1  `sudo passwd root`
+1.  `sudo passwd root`
 2. logout, login as root
 3. `usermod -l we -d /home/we -m pi`
 4. `groupmod --new-name we pi`
