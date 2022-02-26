@@ -107,14 +107,14 @@ cmake     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_SKIP_RPATH=1 \
     -DLIBSCSYNTH=0 \
     -DSUPERNOVA=0 \
-    -DSC_WII=0 \
     -DSC_IDE=0 \
-    -DSC_QT=0 \
     -DSC_ED=0 \
     -DSC_EL=0 \
     -DSC_VIM=1 \
     -DNO_X11=ON -DSC_QT=OFF ..
 ```
+
+NOTE: must remove failing deprecated class manually! (as of writing this)
 
 sc3-plugins
 
@@ -136,3 +136,19 @@ cd sc
 note: you may need to run sclang once first (it will fail) before running `norns/sc/install.sh`
 
 reboot, norns should boot up.
+
+
+
+FIX NETWORK MANAGER (for shields)
+
+edit `/etc/dhcpcd.conf` --- add `denyinterfaces wlan0`
+edit `/etc/NetworkManager/NetworkManager.conf` to be:
+
+```
+[main]
+plugins=ifupdown,keyfile
+dhcp=internal
+
+[ifupdown]
+managed=true
+```
