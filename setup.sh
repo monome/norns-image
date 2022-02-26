@@ -8,28 +8,26 @@ echo "raspberrypi-kernel hold" | sudo dpkg --set-selections
 sudo apt purge libraspberrypi-doc
 
 # install specific version of Raspberry firmware and userland tools
-RPI_FIRMWARE_VERSION="1.20190401-1"
-RPI_FIRMWARE_PACKAGES=( raspberrypi-bootloader libraspberrypi0 libraspberrypi-dev libraspberrypi-bin )
+#RPI_FIRMWARE_VERSION="1.20190401-1"
+#RPI_FIRMWARE_PACKAGES=( raspberrypi-bootloader libraspberrypi0 libraspberrypi-dev libraspberrypi-bin )
 
-for PACKAGE in "${RPI_FIRMWARE_PACKAGES[@]}"
-do
-  wget --quiet "https://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/${PACKAGE}_${RPI_FIRMWARE_VERSION}_armhf.deb"
-  sudo dpkg -i ${PACKAGE}_${RPI_FIRMWARE_VERSION}_armhf.deb
-  echo "${PACKAGE} hold" | sudo dpkg --set-selections
-  rm ${PACKAGE}_${RPI_FIRMWARE_VERSION}_armhf.deb
-done
-
-# uninstall old network packages
-sudo apt purge hostapd
+#for PACKAGE in "${RPI_FIRMWARE_PACKAGES[@]}"
+#do
+  #wget --quiet "https://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/${PACKAGE}_${RPI_FIRMWARE_VERSION}_armhf.deb"
+  #sudo dpkg -i ${PACKAGE}_${RPI_FIRMWARE_VERSION}_armhf.deb
+  #echo "${PACKAGE} hold" | sudo dpkg --set-selections
+  #rm ${PACKAGE}_${RPI_FIRMWARE_VERSION}_armhf.deb
+#done
 
 # install needed packages
-#sudo apt install network-manager dnsmasq-base midisport-firmware
+sudo apt install --no-install-recommends network-manager dnsmasq-base midisport-firmware samba
+sudo apt purge modemmanager
 
 # systemd
 sudo mkdir -p /etc/systemd/system.conf.d
 sudo cp --remove-destination config/10-default-env-vars.conf /etc/systemd/system.conf.d/10-default-env-vars.conf
 sudo cp --remove-destination config/norns-crone.service /etc/systemd/system/norns-crone.service
-sudo rm /etc/systemd/system/norns-supernova.service
+#sudo rm /etc/systemd/system/norns-supernova.service
 #sudo cp --remove-destination config/norns-supernova.service /etc/systemd/system/norns-supernova.service
 sudo cp --remove-destination config/norns-sclang.service /etc/systemd/system/norns-sclang.service
 sudo cp --remove-destination config/norns-jack.service /etc/systemd/system/norns-jack.service
@@ -41,6 +39,9 @@ sudo cp --remove-destination config/norns.target /etc/systemd/system/norns.targe
 sudo cp --remove-destination config/55-maiden-systemctl.pkla /etc/polkit-1/localauthority/50-local.d/55-maiden-systemctl.pkla
 sudo systemctl enable norns.target
 
+# rc.local
+sudo cp config/rc.local /etc/
+
 # motd
 sudo cp config/motd /etc/motd
 
@@ -49,6 +50,12 @@ sudo cp config/10-default-env-vars.sh /etc/profile.d/10-default-env-vars.sh
 
 # bashrc
 sudo cp config/bashrc /home/we/.bashrc
+
+# samba
+(echo "sleep"; echo "sleep") | sudo smbpasswd -s -a we
+sudo cp config/smb.conf /etc/samba/
+sudo /etc/init.d/samba restart
+
 
 # Wifi
 # Use the upstream rtl8192cu driver instead of the problematic realtek 8192cu driver
