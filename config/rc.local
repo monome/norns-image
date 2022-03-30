@@ -18,5 +18,7 @@ if [ "$_IP" ]; then
 fi
 
 amixer set Master 100% on
+amixer --device hw:sndrpimonome set Master 100% on
+sudo alsactl store
 
 exit 0
