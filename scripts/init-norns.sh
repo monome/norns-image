@@ -13,8 +13,11 @@ sudo i2cset -y 1 0x28 0x40
 sudo i2cset -y 1 0x29 0x00
 sudo i2cset -y 1 0x29 0x40
 
-# unmute soundcard output
+# unmute soundcard output (default device)
 amixer set Master 100% on
+# explicitly set codec output volume
+amixer --device hw:sndrpimonome set Master 100% on
+sudo alsactl store
 
 # enable headphone driver (let matron handle this)
 #sudo i2cset -y 1 0x60 1 192    # enable HP outputs
