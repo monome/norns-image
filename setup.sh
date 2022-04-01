@@ -1,27 +1,11 @@
-# monome package apt
-sudo cp config/norns.list /etc/apt/sources.list.d/
-
 # hold packages we don't want to update
 echo "raspberrypi-kernel hold" | sudo dpkg --set-selections
 
 # uninstall packages we don't need
-sudo apt purge libraspberrypi-doc
-
-# install specific version of Raspberry firmware and userland tools
-#RPI_FIRMWARE_VERSION="1.20190401-1"
-#RPI_FIRMWARE_PACKAGES=( raspberrypi-bootloader libraspberrypi0 libraspberrypi-dev libraspberrypi-bin )
-
-#for PACKAGE in "${RPI_FIRMWARE_PACKAGES[@]}"
-#do
-  #wget --quiet "https://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/${PACKAGE}_${RPI_FIRMWARE_VERSION}_armhf.deb"
-  #sudo dpkg -i ${PACKAGE}_${RPI_FIRMWARE_VERSION}_armhf.deb
-  #echo "${PACKAGE} hold" | sudo dpkg --set-selections
-  #rm ${PACKAGE}_${RPI_FIRMWARE_VERSION}_armhf.deb
-#done
+sudo apt purge libraspberrypi-doc modemmanager
 
 # install needed packages
 sudo apt install --no-install-recommends network-manager dnsmasq-base midisport-firmware samba
-sudo apt purge modemmanager
 
 # systemd
 sudo mkdir -p /etc/systemd/system.conf.d
@@ -38,9 +22,6 @@ sudo cp --remove-destination config/norns-watcher.service /etc/systemd/system/no
 sudo cp --remove-destination config/norns.target /etc/systemd/system/norns.target
 sudo cp --remove-destination config/55-maiden-systemctl.pkla /etc/polkit-1/localauthority/50-local.d/55-maiden-systemctl.pkla
 sudo systemctl enable norns.target
-
-# rc.local
-sudo cp config/rc.local /etc/
 
 # motd
 sudo cp config/motd /etc/motd
@@ -102,4 +83,9 @@ sudo apt purge exim4-* nfs-common triggerhappy
 # governor
 sudo systemctl mask raspi-config.service
 
+# set alsa volume and store
+amixer --device hw:sndrpimonome set Master 100% on
+sudo alsactl store
+
+# cleanup
 sudo apt --purge -y autoremove
