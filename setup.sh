@@ -1,9 +1,6 @@
 # hold packages we don't want to update
 echo "raspberrypi-kernel hold" | sudo dpkg --set-selections
 
-# uninstall packages we don't need
-sudo apt purge libraspberrypi-doc modemmanager
-
 # install needed packages
 sudo apt install --no-install-recommends network-manager dnsmasq-base midisport-firmware samba
 
@@ -86,6 +83,9 @@ sudo systemctl mask raspi-config.service
 # set alsa volume and store
 amixer --device hw:sndrpimonome set Master 100% on
 sudo alsactl store
+
+# uninstall packages we don't need
+sudo apt purge libraspberrypi-doc modemmanager
 
 # cleanup
 sudo apt --purge -y autoremove
