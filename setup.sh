@@ -86,6 +86,9 @@ sudo systemctl mask apt-daily-upgrade.timer
 sudo systemctl mask alsa-restore.service
 sudo systemctl mask alsa-state.service
 
+# disable bluetooth modem (bullseye)
+sudo systemctl mask hciuart.service
+
 # disable swap
 sudo apt purge dphys-swapfile
 sudo swapoff -a
