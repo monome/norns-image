@@ -8,7 +8,6 @@ User=we
 Group=we
 LimitRTPRIO=95
 LimitMEMLOCK=infinity
-Environment="SC_PLUGIN_PATH=/home/we/dust/code"
 ExecStart=/home/we/norns/build/ws-wrapper/ws-wrapper ws://*:5556 /usr/bin/sclang -i maiden
 
 [Install]
