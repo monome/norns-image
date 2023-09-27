@@ -7,14 +7,17 @@ sudo apt install --no-install-recommends network-manager dnsmasq-base midisport-
 # systemd
 sudo mkdir -p /etc/systemd/system.conf.d
 sudo cp --remove-destination config/10-default-env-vars.conf /etc/systemd/system.conf.d/10-default-env-vars.conf
-sudo cp --remove-destination config/norns-crone.service /etc/systemd/system/norns-crone.service
-#sudo rm /etc/systemd/system/norns-supernova.service
+sudo rm /etc/systemd/system/norns-crone.service
+#sudo cp --remove-destination config/norns-crone.service /etc/systemd/system/norns-crone.service
+sudo rm /etc/systemd/system/norns-supernova.service
 #sudo cp --remove-destination config/norns-supernova.service /etc/systemd/system/norns-supernova.service
 sudo cp --remove-destination config/norns-sclang.service /etc/systemd/system/norns-sclang.service
 sudo cp --remove-destination config/norns-jack.service /etc/systemd/system/norns-jack.service
 sudo cp --remove-destination config/norns-maiden.service /etc/systemd/system/norns-maiden.service
 sudo cp --remove-destination config/norns-maiden.socket /etc/systemd/system/norns-maiden.socket
-sudo cp --remove-destination config/norns-matron.service /etc/systemd/system/norns-matron.service
+sudo rm /etc/systemd/system/norns-matron.service
+#sudo cp --remove-destination config/norns-matron.service /etc/systemd/system/norns-matron.service
+sudo cp --remove-destination config/norns-main.service /etc/systemd/system/norns-main.service
 sudo cp --remove-destination config/norns-watcher.service /etc/systemd/system/norns-watcher.service
 sudo cp --remove-destination config/norns.target /etc/systemd/system/norns.target
 sudo cp --remove-destination config/55-maiden-systemctl.pkla /etc/polkit-1/localauthority/50-local.d/55-maiden-systemctl.pkla
@@ -67,6 +70,9 @@ sudo systemctl mask apt-daily-upgrade.timer
 # alsa state (handled by norns-init)
 sudo systemctl mask alsa-restore.service
 sudo systemctl mask alsa-state.service
+
+# disable bluetooth modem (bullseye)
+sudo systemctl mask hciuart.service
 
 # disable swap
 sudo apt purge dphys-swapfile
