@@ -1,5 +1,7 @@
 # USB Disk mode
 
+**WARNING** --- Please read https://monome.org/docs/norns/help/#fresh-install which is a much less error-prone method.
+
 If you soft-brick the CM3, you can attach it as a USB disk device and then change files to get it back into working order or read/write the entire disk image.
 
 - remove the bottom panel, toggle the switch (seen through a PCB cutout) from RUN to DISK.

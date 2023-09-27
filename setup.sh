@@ -1,29 +1,8 @@
-# monome package apt
-sudo cp config/norns.list /etc/apt/sources.list.d/
-
 # hold packages we don't want to update
 echo "raspberrypi-kernel hold" | sudo dpkg --set-selections
 
-# uninstall packages we don't need
-sudo apt purge libraspberrypi-doc
-
-# install specific version of Raspberry firmware and userland tools
-RPI_FIRMWARE_VERSION="1.20190401-1"
-RPI_FIRMWARE_PACKAGES=( raspberrypi-bootloader libraspberrypi0 libraspberrypi-dev libraspberrypi-bin )
-
-for PACKAGE in "${RPI_FIRMWARE_PACKAGES[@]}"
-do
-  wget --quiet "https://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/${PACKAGE}_${RPI_FIRMWARE_VERSION}_armhf.deb"
-  sudo dpkg -i ${PACKAGE}_${RPI_FIRMWARE_VERSION}_armhf.deb
-  echo "${PACKAGE} hold" | sudo dpkg --set-selections
-  rm ${PACKAGE}_${RPI_FIRMWARE_VERSION}_armhf.deb
-done
-
-# uninstall old network packages
-sudo apt purge hostapd
-
 # install needed packages
-#sudo apt install network-manager dnsmasq-base midisport-firmware
+sudo apt install --no-install-recommends network-manager dnsmasq-base midisport-firmware samba
 
 # systemd
 sudo mkdir -p /etc/systemd/system.conf.d
@@ -52,6 +31,12 @@ sudo cp config/10-default-env-vars.sh /etc/profile.d/10-default-env-vars.sh
 
 # bashrc
 sudo cp config/bashrc /home/we/.bashrc
+
+# samba
+(echo "sleep"; echo "sleep") | sudo smbpasswd -s -a we
+sudo cp config/smb.conf /etc/samba/
+sudo /etc/init.d/samba restart
+
 
 # Wifi
 # Use the upstream rtl8192cu driver instead of the problematic realtek 8192cu driver
@@ -101,4 +86,12 @@ sudo apt purge exim4-* nfs-common triggerhappy
 # governor
 sudo systemctl mask raspi-config.service
 
+# set alsa volume and store
+amixer --device hw:sndrpimonome set Master 100% on
+sudo alsactl store
+
+# uninstall packages we don't need
+sudo apt purge libraspberrypi-doc modemmanager
+
+# cleanup
 sudo apt --purge -y autoremove
