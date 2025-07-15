@@ -13,7 +13,7 @@ this repository contains files for building the norns disk image.
 
 * linux: `screen /dev/ttyACM0 115200`
 * mac: `screen /dev/tty.ubserial(...) 115200` (fill in the serial number)
-* windows: install [Putty](https://www.putty.org/) and connect with connection type "Serial" to serial line COM(...) and speed: 115200 (fill in comport number)
+* windows: install [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/) and connect with connection type "Serial" to serial line COM(...) and speed: 115200 (fill in comport number)
 
 login is `we` and password is `sleep`
 
